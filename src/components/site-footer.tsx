@@ -1,17 +1,40 @@
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
 import type { Locale } from "@/types";
 
+const helpLinks = [
+  { slug: "shipping", en: "Shipping & Returns", zh: "配送与退换" },
+  { slug: "care", en: "Care", zh: "养护" },
+  { slug: "contact", en: "Contact", zh: "联系" },
+  { slug: "privacy", en: "Privacy", zh: "隐私" },
+  { slug: "terms", en: "Terms", zh: "条款" },
+];
+
 export function SiteFooter({ locale }: { locale: Locale }) {
+  const zh = locale === "zh-CN";
   return (
     <footer className="site-footer">
-      <div className="footer-cta page-shell"><p>{locale === "zh-CN" ? "让喜欢的东西，慢慢成为生活的一部分。" : "Let what you love become part of everyday life."}</p><Link className="footer-cta-link" href={`/${locale}/shop`}>{locale === "zh-CN" ? "浏览本期选物" : "Explore the collection"}<ArrowUpRight size={22} /></Link></div>
       <div className="footer-main page-shell">
-        <div className="footer-brand"><div className="footer-mark"><img src="/moralune-wordmark.png" alt="MORALUNE" /></div><p>{locale === "zh-CN" ? "为日常，选一点刚刚好的美。" : "A little beauty, chosen for everyday living."}</p></div>
-        <div className="footer-links"><span>{locale === "zh-CN" ? "探索" : "EXPLORE"}</span><Link href={`/${locale}/shop`}>{locale === "zh-CN" ? "全部选物" : "Shop all"}</Link><Link href={`/${locale}/about`}>{locale === "zh-CN" ? "关于 MORALUNE" : "Our story"}</Link><Link href={`/${locale}/selection`}>{locale === "zh-CN" ? "选品清单" : "Selection"}</Link></div>
-        <div className="footer-news"><span>{locale === "zh-CN" ? "日常来信" : "NOTES FOR LIVING"}</span><p>{locale === "zh-CN" ? "偶尔来信，分享新物与生活灵感。" : "Occasional notes on new finds and everyday inspiration."}</p><div className="newsletter"><input aria-label={locale === "zh-CN" ? "你的邮箱" : "Your email"} placeholder={locale === "zh-CN" ? "你的邮箱" : "Your email"} /><button aria-label={locale === "zh-CN" ? "订阅" : "Subscribe"}><ArrowUpRight size={18} /></button></div></div>
+        <div className="footer-brand">
+          <div className="footer-mark"><img src="/moralune-wordmark.png" alt="MORALUNE" /></div>
+          <p>{zh ? "为日常，选一点刚刚好的美。" : "A little beauty, chosen for everyday living."}</p>
+        </div>
+        <div className="footer-links">
+          <span>{zh ? "探索" : "Explore"}</span>
+          <Link href={`/${locale}/shop`}>{zh ? "全部选物" : "Shop"}</Link>
+          <Link href={`/${locale}/about`}>{zh ? "关于" : "About"}</Link>
+          <Link href={`/${locale}/selection`}>{zh ? "选物清单" : "Selection"}</Link>
+        </div>
+        <div className="footer-links">
+          <span>{zh ? "帮助" : "Help"}</span>
+          {helpLinks.map((link) => (
+            <Link key={link.slug} href={`/${locale}/pages/${link.slug}`}>{zh ? link.zh : link.en}</Link>
+          ))}
+        </div>
       </div>
-      <div className="footer-bottom page-shell"><span>© {new Date().getFullYear()} MORALUNE</span><span>{locale === "zh-CN" ? "隐私政策 · 使用条款" : "Privacy · Terms"}</span></div>
+      <div className="footer-bottom page-shell">
+        <span>© {new Date().getFullYear()} MORALUNE</span>
+        <span>{zh ? "月光一样的日常器物" : "Objects for everyday living"}</span>
+      </div>
     </footer>
   );
 }

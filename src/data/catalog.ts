@@ -3,11 +3,11 @@ import type { Category, Product } from "@/types";
 const text = (zh: string, en: string) => ({ "zh-CN": zh, en });
 
 export const categories: Category[] = [
-  { id: "art-rugs", slug: "art-rugs", name: text("艺术地毯", "Art Rugs"), description: text("以色彩与织造，为空间铺陈灵感。", "Artful weaves that bring warmth and character to a room.") },
-  { id: "cushions-throws", slug: "cushions-throws", name: text("抱枕 / 披肩", "Cushions & Throws"), description: text("以柔软织物，为日常添一层舒适。", "Soft layers for slower, more comfortable days.") },
-  { id: "wall-art", slug: "wall-art", name: text("墙面艺术", "Wall Art"), description: text("让墙面成为表达个人趣味的一部分。", "Thoughtful pieces that give your walls a point of view.") },
-  { id: "decorative-lighting", slug: "decorative-lighting", name: text("装饰灯具", "Decorative Lighting"), description: text("用柔和光线，塑造空间的氛围。", "Sculptural light for a softer atmosphere.") },
-  { id: "artful-storage", slug: "artful-storage", name: text("收纳艺术", "Artful Storage"), description: text("让收纳物件也成为空间风景。", "Useful forms that make everyday storage beautiful.") },
+  { id: "art-rugs", slug: "art-rugs", name: text("块毯", "Rugs"), description: text("羊毛与织纹，铺在地面上的安静一层。", "Wool and weave for the floor.") },
+  { id: "cushions-throws", slug: "cushions-throws", name: text("抱枕与披肩", "Cushions & Throws"), description: text("沙发与床上的柔软一层。", "Soft layers for the sofa and bed.") },
+  { id: "wall-art", slug: "wall-art", name: text("墙面", "Wall"), description: text("给墙面留一件安静的作品。", "Hangings and works for a quiet wall.") },
+  { id: "artful-storage", slug: "artful-storage", name: text("器物", "Objects"), description: text("桌面、玄关与层架上的小器物。", "Small pieces for the table, entry, and shelf.") },
+  { id: "decorative-lighting", slug: "decorative-lighting", name: text("灯具", "Lighting"), description: text("让房间保持柔和的灯。", "Lamps that keep a room soft.") },
 ];
 
 export const products: Product[] = [

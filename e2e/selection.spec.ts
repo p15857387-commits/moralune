@@ -2,10 +2,10 @@ import { expect, test } from "@playwright/test";
 
 test("browse, select and submit an inquiry", async ({ page }) => {
   await page.goto("/zh-CN");
-  await page.getByRole("link", { name: "开始选品" }).click();
+  await page.getByRole("link", { name: "探索" }).first().click();
   await page.getByRole("link", { name: "山岚胡桃木托盘" }).first().click();
   await page.getByRole("button", { name: /加入清单/ }).click();
-  await page.getByLabel(/选品清单/).click();
+  await page.getByLabel(/选物清单/).click();
   await page.getByLabel("你的姓名").fill("林清");
   await page.getByLabel("邮箱").fill("lin@example.com");
   await page.getByLabel("所在地区").fill("上海");
@@ -14,9 +14,9 @@ test("browse, select and submit an inquiry", async ({ page }) => {
 });
 
 test("language switch preserves the selection", async ({ page }) => {
-  await page.goto("/zh-CN/products/walnut-catchall-tray");
+  await page.goto("/zh-CN/products/walnut-landing-tray");
   await page.getByRole("button", { name: /加入清单/ }).click();
   await page.getByRole("link", { name: "Switch to English" }).click();
   await page.getByLabel(/Selection 1/).click();
-  await expect(page.getByText("Mist Walnut Catchall")).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Mist walnut landing tray" })).toBeVisible();
 });

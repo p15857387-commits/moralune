@@ -6,7 +6,7 @@ import Link from "next/link";
 import { ArrowLeft, LoaderCircle, Minus, Plus, Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { products } from "@/data/catalog";
-import { formatPrice, localize } from "@/lib/catalog";
+import { displayName, formatPrice } from "@/lib/catalog";
 import { useSelectionStore } from "@/store/selection";
 import type { Locale } from "@/types";
 
@@ -86,10 +86,10 @@ export function SelectionPage({ locale, paypalEnabled, paypalPriceIds }: { local
         <section className="selection-items">
           {selected.map(({ product, quantity }) => (
             <article className={!product!.available ? "selection-item unavailable" : "selection-item"} key={product!.id}>
-              <div className="selection-thumb"><Image src={product!.image!} alt={localize(product!.name, locale)} fill sizes="120px" /></div>
+              <div className="selection-thumb"><Image src={product!.image!} alt={displayName(product!.name, locale)} fill sizes="120px" /></div>
               <div className="selection-item-copy">
                 <div>
-                  <h2>{localize(product!.name, locale)}</h2>
+                  <h2>{displayName(product!.name, locale)}</h2>
                   <p>{formatPrice(product!.price, locale)}</p>
                   {!product!.available && <strong>{zh ? "暂时缺货，请移除后再提交。" : "Currently unavailable. Remove before submitting."}</strong>}
                 </div>

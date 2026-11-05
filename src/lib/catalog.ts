@@ -5,6 +5,23 @@ export function localize(value: LocalizedText | undefined, locale: Locale): stri
   return value[locale]?.trim() || value["zh-CN"] || value.en || "";
 }
 
+const categoryOrder = ["art-rugs", "cushions-throws", "wall-art", "artful-storage", "decorative-lighting"];
+
+export function sortCategories<T extends { slug: string }>(categories: T[]): T[] {
+  return [...categories].sort((a, b) => {
+    const ai = categoryOrder.indexOf(a.slug);
+    const bi = categoryOrder.indexOf(b.slug);
+    return (ai < 0 ? 99 : ai) - (bi < 0 ? 99 : bi);
+  });
+}
+
+export function displayName(value: LocalizedText | undefined, locale: Locale): string {
+  const raw = localize(value, locale);
+  if (locale !== "en" || !raw) return raw;
+  const lower = raw.toLowerCase();
+  return lower.charAt(0).toUpperCase() + lower.slice(1);
+}
+
 export function formatPrice(price: number, locale: Locale = "zh-CN") {
   return new Intl.NumberFormat(locale, { style: "currency", currency: "CNY", maximumFractionDigits: 0 }).format(price);
 }

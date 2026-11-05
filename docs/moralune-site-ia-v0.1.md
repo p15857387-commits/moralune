@@ -5,6 +5,17 @@
 - 依据：现有主站 `Paul WEB-project`、品牌视觉规范 v0.2、交易侧对接说明
 - 市场默认：海外英文主路径；保留 `zh-CN` 双语骨架
 
+## 实施注记（2026-11-05 · 导航 / 首页一轮）
+
+已落在当前店面分支，品牌色仍是 moralune Blue `#003AF4`，默认底 Moon Mist，无大面积黑底。
+
+- 顶栏：Shop 为主入口；桌面端次级一行五个品类（Rugs、Cushions & Throws、Wall、Objects、Lighting）。右侧保留 Language 与 Selection（电蓝数量）。顶栏不加 Checkout。搜索与 Journal 本轮不做。
+- 首页顺序：浅底宽 Hero（Explore → Shop，次链 About）→ 一句 quiet promise → 五品类卡 → The Edit → 一条浅底材质/空间故事 → Closing CTA。多条暗色 campaign 与三条 trust 已去掉。
+- Objects 替换「收纳艺术」；slug 仍是 `artful-storage`。
+- PLP：随 `?category=` 变化的标题与导语、All + 五类 chips、结果数、sentence-case 卡片。不做尺寸/颜色筛选抽屉。
+- PDP：Add to Selection 为主，SHOPPAAS 外链仍在有配置时出现；规格为 Material / Dimensions / Care 三块；Story 独立；Related 为同品类最多 3 件。
+- 页脚帮助页：`/{locale}/pages/{shipping|care|contact|privacy|terms}`，目前是短占位。
+
 ---
 
 ## 1. 主导航（Primary）
@@ -34,7 +45,7 @@
 | 块毯 | `art-rugs` | Rugs |
 | 抱枕及披肩 | `cushions-throws` | Cushions & Throws |
 | 墙面挂饰 | `wall-art` | Wall |
-| 小摆件 | `artful-storage`（现「收纳艺术」） | Objects（建议改名，slug 可迁 `objects`） |
+| 小摆件 | `artful-storage`（对外已称 Objects / 器物；slug 暂不迁） | Objects |
 | 装饰灯具 | `decorative-lighting` | Lighting |
 
 ---
@@ -71,14 +82,12 @@ CMS（Sanity）文档类型沿用并扩展：`product`、`category`、`siteSetti
 
 | # | 模块 | 内容要点 | 备注 |
 |---|------|----------|------|
-| 1 | Hero | 一句品牌主张 + 主场景图（柔散射/blue hour）+ CTA「Explore the collection」→ Shop；次链 About | 现有暗底全幅需改为浅底或局部 Deep Night 故事条，符合 v0.2 |
-| 2 | Trust / Promise | 3 点：独立品牌混选 / 材质触感 / 为日常而用 | 现有 `ml-trust` 可保留结构 |
-| 3 | Shop by category | 五品类卡 → 对应 PLP 过滤 | 对齐品牌五类；Objects 文案替换「收纳艺术」 |
-| 4 | The Edit（精选） | 4–8 件 `featured` 商品卡 | 锚点 `#edit` |
-| 5 | Material / Room story | 1–2 条全宽内容带（材质或空间），链到 Journal 或品类 | 现有 campaign band 收敛为浅底+电蓝点睛 |
-| 6 | Rug spotlight（可选） | 块毯孤立产品轮播 | 现有 `rug-carousel`，首页可收纳或只放 Rugs 入口 |
-| 7 | Manifesto | 选物观短文 + About | |
-| 8 | Closing CTA | 「Find the things that feel like home」→ Shop | 浅底，勿黑底铺满 |
+| 1 | Hero | 浅底宽幅：主张 + 柔和场景 + Explore → Shop；次链 About | 本轮已改浅底，不再用暗色全幅 |
+| 2 | Quiet promise | 一行即可 | 替代原三条 trust |
+| 3 | Shop by category | 五品类卡 → `?category=` | Objects 已替换「收纳艺术」 |
+| 4 | The Edit | `featured` 商品卡 | 锚点 `#edit` |
+| 5 | Material / Room story | 一条浅底故事，链到 About | Journal 未建则不放 teaser |
+| 6 | Closing CTA | Explore → Shop | 浅底 |
 
 不在首页堆折扣条；顶栏 announcement 用气质短句即可。
 
@@ -146,17 +155,9 @@ PDP ──(optional) shoppaasBuyUrl──► SHOPPAAS 托管购买页（外链�
 
 ---
 
-## 7. 与现有代码的落差（实施备忘）
+## 7. 本轮之后仍故意留着
 
-- 包名仍为 `youwu-living`；git 无首提交/无远端
-- CSS 主底偏 paper/cream，接近 Moon Mist，但 **缺电蓝 token**；首页 Hero/部分模块仍偏暗底，需按 v0.2 收敛
-- 词标 PNG 已在 `public/`，品牌侧称源文件未入库——logo 位可继续用现图，待 SVG 替换
-- 顶栏「本期主题」可保留；Journal 首期可不进主导航
-
----
-
-## 8. 建议下一工程步（待 Paul 点头）
-
-1. 设计系统 token：Moon Mist / Ink / moralune Blue / Lunar Gold 写入 CSS 变量  
-2. 按本 IA 收敛首页模块与主导航文案（Objects 更名）  
-3. 仓库首提交 + GitHub/预览部署  
+- Journal 页与搜索不做。
+- PLP 只有品类 chips，没有尺寸 / 颜色抽屉。块毯轮播组件还在代码里，本轮不放进首页或列表。
+- 页脚五页是短占位，不是法务定稿。
+- 顶栏不再放「本期主题」；The Edit 留在首页 `#edit`。  

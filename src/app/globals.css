@@ -165,3 +165,54 @@
 /* Brand v0.2.1: moralune Blue only on primary CTAs and text links. Nav and page ground stay Ink on Moon Mist. */
 .button.dark,.add-button{background:var(--blue);border-color:var(--blue);color:#fff}
 .text-link{color:var(--blue);border-bottom-color:var(--blue)}
+
+/* IA pass: light header, five-category row, Moon Mist hero, calm footer. */
+.announcement{background:transparent;color:var(--muted);border-bottom:1px solid var(--line)}
+.site-header{height:auto;background:rgba(244,241,236,.96)}
+.header-inner{height:72px}
+.desktop-nav .nav-shop{font-weight:500}
+.category-nav{display:flex;flex-wrap:nowrap;gap:22px;width:min(1320px,calc(100% - 72px));margin:0 auto;padding:2px 0 14px;overflow-x:auto;border-bottom:1px solid var(--line);font-size:12px;letter-spacing:.04em}
+.category-nav a:hover{color:var(--blue)}
+.home-intro{display:grid;grid-template-columns:minmax(280px,.86fr) minmax(0,1.14fr);gap:clamp(28px,4vw,72px);align-items:center;width:min(1320px,calc(100% - 72px));margin:36px auto 8px;color:var(--ink)}
+.home-intro-copy h1{margin:0;font-family:var(--serif);font-weight:300;font-size:clamp(46px,5.2vw,78px);line-height:1.02;letter-spacing:-.04em;color:var(--ink)}
+.home-intro-copy h1 i{font-style:italic}
+.home-intro-lede{max-width:460px;margin:22px 0 0;color:var(--muted);font-size:15px;line-height:1.7}
+.home-intro-actions{display:flex;align-items:center;gap:22px;margin-top:28px}
+.home-intro-scene{position:relative;min-height:clamp(380px,46vw,620px);background:var(--soft-clay);overflow:hidden}
+.home-intro-scene img{object-fit:cover}
+.quiet-promise{width:min(1320px,calc(100% - 72px));margin:22px auto 0;padding:18px 0 0;border-top:1px solid var(--line);color:var(--muted);font-size:12px;letter-spacing:.12em}
+.home-categories{padding-left:clamp(28px,7.5vw,116px);padding-right:clamp(28px,7.5vw,116px)}
+.home-categories .ml-section-head h2,.ml-featured-head h2,.ml-manifesto-copy h2,.ml-last h2{font-family:var(--serif);font-weight:300;color:var(--ink)}
+.ml-category-card{background:var(--soft-clay)}
+.ml-category-card:after{background:linear-gradient(180deg,rgba(244,241,236,0) 34%,rgba(26,28,31,.72))}
+.ml-featured{background:var(--soft-clay)}
+.ml-manifesto{background:var(--paper)}
+.ml-last{background:var(--paper);text-align:center;padding:108px 24px 120px;border-top:1px solid var(--line)}
+.ml-last h2{max-width:12ch;margin:14px auto 28px}
+.ml-last .button{margin-inline:auto}
+.filters{top:148px;display:flex;flex-wrap:nowrap;gap:8px;overflow-x:auto;background:rgba(244,241,236,.96);-webkit-overflow-scrolling:touch}
+.filters a{flex:none;border:1px solid var(--line);background:transparent;color:var(--ink)}
+.filters a.active{background:var(--blue);border-color:var(--blue);color:#fff}
+.status-pill.is-available{background:rgba(244,241,236,.94);color:var(--ink)}
+.spec-blocks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:54px 0 10px}
+.spec-blocks article{background:var(--soft-clay);padding:22px 20px 26px}
+.spec-blocks h2{margin:0 0 12px;font-size:11px;font-weight:500;letter-spacing:.14em}
+.spec-blocks p{margin:0;font-size:14px;line-height:1.65}
+.static-page{padding:88px 0 120px;max-width:720px}
+.static-page h1{font-family:var(--serif);font-weight:300;font-size:clamp(42px,5vw,68px);margin:0 0 18px}
+.static-page>p{color:var(--muted);font-size:16px;line-height:1.7;margin:0 0 28px}
+.site-footer{background:var(--soft-clay);color:var(--ink)}
+.footer-main{padding-top:64px;color:var(--ink)}
+.footer-brand p,.footer-links>span,.footer-bottom{color:var(--muted)}
+.footer-bottom{border-top-color:var(--line)}
+.footer-links a:hover{color:var(--blue)}
+@media(max-width:760px){
+  .category-nav{display:none}
+  .header-inner{border-bottom:1px solid var(--line)}
+  .home-intro{grid-template-columns:1fr;width:min(100% - 36px,1320px);margin-top:18px}
+  .home-intro-scene{min-height:68vw}
+  .quiet-promise,.home-categories{width:auto}
+  .filters{top:104px}
+  .spec-blocks{grid-template-columns:1fr}
+  .mobile-menu nav a.mobile-category{font-family:var(--sans);font-size:16px;padding:12px 0}
+}
