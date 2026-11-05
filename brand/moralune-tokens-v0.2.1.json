@@ -1,0 +1,27 @@
+{
+  "version": "0.2.1",
+  "lockedAt": "2026-11-05",
+  "colors": {
+    "moraluneBlue": { "hex": "#003AF4", "rgb": [0, 58, 244], "note": "Sampled from logo source; brand primary" },
+    "moonMist": { "hex": "#F4F1EC", "rgb": [244, 241, 236] },
+    "softClay": { "hex": "#E8DFD4", "rgb": [232, 223, 212] },
+    "deepNight": { "hex": "#1A1C1F", "rgb": [26, 28, 31] },
+    "lunarGold": { "hex": "#C4A574", "rgb": [196, 165, 116] },
+    "stone": { "hex": "#9A958C", "rgb": [154, 149, 140] },
+    "ink": { "hex": "#2C2B29", "rgb": [44, 43, 41] }
+  },
+  "assets": {
+    "wordmarkTransparent": "assets/moralune-wordmark.png",
+    "wordmarkOnBlack": "assets/moralune-wordmark-on-black.png",
+    "wordmarkOnMoonMist": "assets/moralune-wordmark-on-moon-mist.png",
+    "wordmarkOnSoftClay": "assets/moralune-wordmark-on-soft-clay.png",
+    "markMoon": "assets/moralune-mark-moon.png",
+    "favicon16": "assets/favicon-16.png",
+    "favicon32": "assets/favicon-32.png",
+    "favicon48": "assets/favicon-48.png",
+    "appleTouchIcon": "assets/apple-touch-icon.png",
+    "mark512": "assets/moralune-mark-512.png",
+    "swatchBlue": "assets/swatch-moralune-blue.png"
+  },
+  "basePath": "/cursor/stores/store-2e4a7aa7-98db-4477-a556-ad9765f43df9/brand"
+}

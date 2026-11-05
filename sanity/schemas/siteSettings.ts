@@ -1,0 +1,2 @@
+import { defineType } from "sanity";
+export const siteSettings = defineType({ name: "siteSettings", title: "站点设置", type: "document", fields: [{ name: "brandName", title: "品牌名称", type: "localizedText" }, { name: "tagline", title: "品牌主张", type: "localizedText" }, { name: "heroImage", title: "首页主图", type: "image", options: { hotspot: true } }, { name: "inquiryEmail", title: "选品通知邮箱", type: "string" }] });

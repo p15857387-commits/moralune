@@ -1,0 +1,1 @@
+export default function Loading() { return <div className="page-shell" style={{ minHeight: "70vh", display: "grid", placeItems: "center" }}><p className="eyebrow">MORALUNE · OBJECTS FOR LIVING</p></div>; }
