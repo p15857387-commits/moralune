@@ -1,0 +1,2 @@
+import { defineType } from "sanity";
+export const category = defineType({ name: "category", title: "商品分类", type: "document", fields: [{ name: "name", title: "名称", type: "localizedText" }, { name: "slug", title: "Slug", type: "slug", options: { source: "name.en" }, validation: (rule) => rule.required() }, { name: "description", title: "简介", type: "localizedText" }, { name: "order", title: "排序", type: "number" }] });
