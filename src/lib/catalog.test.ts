@@ -1,11 +1,13 @@
 import { describe, expect, it } from "vitest";
 import { categories } from "@/data/catalog";
-import { displayName, isPurchasable, isPublicCatalogProduct, localize, snapshotSelection, sortCategories } from "./catalog";
+import { displayName, formatListedPrice, isPreviewListedProduct, isPurchasable, isPublicCatalogProduct, localize, productsForShop, snapshotSelection, sortCategories } from "./catalog";
 
 describe("catalog", () => {
-  it("localizes content and falls back to Chinese", () => {
+  it("localizes content and falls back when a locale is blank", () => {
     expect(localize({ "zh-CN": "囿物", en: "YOUWU" }, "en")).toBe("YOUWU");
     expect(localize({ "zh-CN": "囿物", en: "" }, "en")).toBe("囿物");
+    expect(localize({ "zh-CN": "", en: "Terra Hand-Tufted Wool Rug - Sand" }, "zh-CN")).toBe("Terra Hand-Tufted Wool Rug - Sand");
+    expect(displayName({ "zh-CN": "", en: "Terra Hand-Tufted Wool Rug - Sand" }, "zh-CN")).toBe("Terra Hand-Tufted Wool Rug - Sand");
   });
 
   it("rebuilds selection snapshots from trusted catalog prices", () => {
@@ -54,5 +56,20 @@ describe("catalog", () => {
       [draft, offAssortment, unpriced],
       "en",
     ).unavailableIds).toEqual(["RUG-TERRA-01", "WAL-LOOM-01", "free"]);
+    expect(formatListedPrice(draft, "en")).toBeUndefined();
+    expect(formatListedPrice(unpriced, "en")).toBeUndefined();
+  });
+
+  it("shows preview drafts and prefers them on a category page", () => {
+    const name = { "zh-CN": "", en: "Draft rug" };
+    const draft = { id: "RUG-1", slug: "rug-1", name, price: 0, available: false, category: "art-rugs", status: "draft" as const, published: false };
+    const hidden = { id: "WAL-LOOM-01", slug: "wal", name, price: 0, available: false, category: "wall-art", status: "draft" as const, published: false, offAssortment: true, listingRecommendation: "do-not-list" as const };
+    const demo = { id: "indigo", slug: "indigo", name: { "zh-CN": "靛", en: "Indigo" }, price: 10, available: true, category: "art-rugs" };
+    expect(isPreviewListedProduct(draft)).toBe(true);
+    expect(isPreviewListedProduct(hidden)).toBe(false);
+    expect(isPublicCatalogProduct(draft)).toBe(false);
+    expect(productsForShop([demo, hidden, draft], "art-rugs").map((item) => item.id)).toEqual(["RUG-1"]);
+    expect(productsForShop([demo, hidden, draft]).map((item) => item.id)).toEqual(["RUG-1", "indigo"]);
+    expect(productsForShop([{ ...demo, category: "wall-art" }], "wall-art").map((item) => item.id)).toEqual(["indigo"]);
   });
 });

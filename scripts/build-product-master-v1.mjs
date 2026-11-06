@@ -84,6 +84,9 @@ function isUnknownPrice(value) {
   return text === "unknown" || text.startsWith("unknown ") || text.startsWith("unknown(") || text.includes("not usable") || text.includes("placeholder");
 }
 
+const isMain = process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url);
+
+if (isMain) {
 const table = parseCsv(readFileSync(csvPath, "utf8"));
 const header = table[0];
 const expected = columns.map(([csv]) => csv);
@@ -124,3 +127,4 @@ console.log(JSON.stringify({
   unknownMargin: unknownMargin.map((record) => record.sku),
   unknownListed: unknownListed.map((record) => record.sku),
 }, null, 2));
+}

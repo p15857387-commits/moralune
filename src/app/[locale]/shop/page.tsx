@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { PreviewNotice } from "@/components/preview-notice";
 import { ProductGrid } from "@/components/product-grid";
 import { getCatalog } from "@/lib/catalog-source";
-import { isPublicCatalogProduct, localize, sortCategories } from "@/lib/catalog";
+import { localize, productsForShop, sortCategories } from "@/lib/catalog";
 import { isLocale } from "@/lib/i18n";
+import { previewRobots } from "@/lib/site-metadata";
 
 type Props = { params: Promise<{ locale: string }>; searchParams: Promise<{ category?: string }> };
 
@@ -14,7 +16,7 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
   const { categories } = await getCatalog();
   const active = sortCategories(categories).find((item) => item.slug === category);
   const title = active ? localize(active.name, locale) : locale === "zh-CN" ? "全部选物" : "Shop";
-  return { title };
+  return { title, robots: previewRobots };
 }
 
 export default async function ShopPage({ params, searchParams }: Props) {
@@ -24,8 +26,7 @@ export default async function ShopPage({ params, searchParams }: Props) {
   const { categories, products } = await getCatalog();
   const ordered = sortCategories(categories);
   const active = ordered.find((item) => item.slug === category);
-  const listed = products.filter(isPublicCatalogProduct);
-  const visible = active ? listed.filter((product) => product.category === active.slug) : listed;
+  const visible = productsForShop(products, active?.slug);
   const title = active ? localize(active.name, locale) : zh ? "全部选物" : "Shop";
   const lead = active
     ? localize(active.description, locale)
@@ -37,6 +38,7 @@ export default async function ShopPage({ params, searchParams }: Props) {
   return (
     <div className="shop-page page-shell">
       <header className="page-intro">
+        <PreviewNotice locale={locale} />
         <p className="eyebrow">{zh ? "选物" : "Shop"}</p>
         <h1>{title}</h1>
         <p>{lead}</p>

@@ -3,7 +3,7 @@ import { resolve } from "node:path";
 import { describe, expect, it } from "vitest";
 import { products } from "@/data/catalog";
 import { paypalPriceMap } from "@/lib/env";
-import { isPublicCatalogProduct, isPurchasable } from "@/lib/catalog";
+import { formatListedPrice, isPreviewListedProduct, isPublicCatalogProduct, isPurchasable, productsForShop } from "@/lib/catalog";
 import { getCatalog, listPublicFallbackProducts } from "@/lib/catalog-source";
 import {
   DO_NOT_LIST_SKUS,
@@ -45,11 +45,22 @@ describe("product master v1", () => {
       expect(draft.price).toBe(0);
       expect(draft.shopifyVariantId).toBeUndefined();
       expect(draft.shoppaasBuyUrl).toBeUndefined();
-      expect(draft.image).toBeUndefined();
+      if (draft.id === "RUG-TERRA-01-SND-160x230") {
+        expect(draft.image).toBeUndefined();
+        expect(draft.images).toEqual([]);
+      } else {
+        expect(draft.image).toMatch(/^\/products\/v1\//);
+        expect(draft.images?.[0]?.src).toBe(draft.image);
+        expect(draft.images?.[0]?.role).toBe("hero");
+      }
       expect(draft.name["zh-CN"]).toBe("");
       expect(draft.name.en.length).toBeGreaterThan(0);
+      expect(draft.description?.en.length).toBeGreaterThan(0);
       expect(isPublicCatalogProduct(draft)).toBe(false);
+      expect(isPreviewListedProduct(draft)).toBe(!draft.offAssortment);
       expect(isPurchasable(draft)).toBe(false);
+      expect(formatListedPrice(draft, "en")).toBeUndefined();
+      expect(JSON.stringify(draft)).not.toMatch(/\b(SGS|OEKO-TEX|certified)\b/i);
       for (const key of internalKeys) expect(draft).not.toHaveProperty(key);
     }
   });
@@ -146,11 +157,24 @@ describe("product master v1", () => {
     expect(JSON.stringify(products)).not.toContain("made-in-china.com");
   });
 
-  it("does not return drafts from getCatalog", async () => {
+  it("lists preview drafts on the shop catalog and keeps them unpriced", async () => {
     const catalog = await getCatalog();
-    const ids = new Set(catalog.products.map((product) => product.id));
-    for (const record of productMasterV1) expect(ids.has(record.sku)).toBe(false);
-    expect(catalog.products.every(isPublicCatalogProduct)).toBe(true);
+    const drafts = catalog.products.filter((product) => product.status === "draft");
+    expect(drafts).toHaveLength(47);
+    expect(drafts.some((product) => product.id.startsWith("WAL-LOOM"))).toBe(false);
+    expect(drafts.every((product) => isPreviewListedProduct(product) && !isPublicCatalogProduct(product) && !isPurchasable(product) && product.price === 0)).toBe(true);
+    expect(catalog.products.some((product) => product.id === "indigo-tide-rug")).toBe(true);
+    expect(productsForShop(catalog.products, "art-rugs").every((product) => product.status === "draft" && product.category === "art-rugs")).toBe(true);
+    expect(productsForShop(catalog.products, "art-rugs")).toHaveLength(10);
+    expect(productsForShop(catalog.products, "wall-art").some((product) => product.id.startsWith("WAL-LOOM"))).toBe(false);
+    expect(productsForShop(catalog.products)[0]?.status).toBe("draft");
     expect(JSON.stringify(catalog)).not.toContain("made-in-china.com");
+    const terra = drafts.find((product) => product.id === "RUG-TERRA-01-SND-160x230");
+    expect(terra?.image).toBeUndefined();
+    expect(terra?.images).toEqual([]);
+    const clay = drafts.find((product) => product.id === "RUG-TERRA-04-CLY-160x230");
+    expect(clay?.description?.en).toBe("Hand-tufted wool in a muted clay tone; hank-dyed yarn for depth of colour.");
+    expect(clay?.unverifiedFields).toContain("material");
+    expect(clay?.material?.en).toContain("bamboo viscose");
   });
 });
