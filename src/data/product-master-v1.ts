@@ -1,5 +1,6 @@
-import type { ListingRecommendation, LocalizedText, Product } from "@/types";
+import type { ListingRecommendation, LocalizedText, Product, UnverifiedSpecField } from "@/types";
 import rows from "./product-master-v1.json";
+import { productPhotosBySku } from "./product-photos-v1";
 
 /**
  * Product master v1, imported as unpublished drafts.
@@ -9,6 +10,9 @@ import rows from "./product-master-v1.json";
  * toPublicProductDraft() does not copy them onto the storefront Product.
  * Suggested retail estimates are not Product.price and are not PayPal USD prices.
  * zh-CN copy is intentionally blank. TODO: translate; do not invent Chinese marketing copy.
+ *
+ * This preview lists the drafts on the shop and PDP. They stay unpublished, unpriced,
+ * and unavailable. Photos and the swap path: src/data/PHOTOS.md.
  */
 
 export const CATEGORY_BY_CODE = {
@@ -105,18 +109,71 @@ export function isUnknownMasterValue(value: string): boolean {
   return text === "unknown" || text.startsWith("unknown ") || text.startsWith("unknown(") || text.includes("not usable") || text.includes("placeholder");
 }
 
+/** Supplier text that is incomplete, conflicting, or explicitly unverified. */
+export function isUncertainMasterValue(value: string): boolean {
+  if (isUnknownMasterValue(value)) return true;
+  const text = value.trim().toLowerCase();
+  return text.includes("unknown")
+    || text.includes("conflict")
+    || text.includes("unverified")
+    || text.includes("not confirmed")
+    || text.includes("doubtful")
+    || text.includes("not meaningful")
+    || text.includes("as stated")
+    || text.includes("title mentions")
+    || text.includes("title says")
+    || text.includes("ratio")
+    || text.includes("generically")
+    || /\boptions\b/.test(text);
+}
+
+function presentClaim(value: string): { text?: string; unverified: boolean } {
+  const trimmed = value.trim();
+  if (!trimmed || isUnknownMasterValue(trimmed)) return { unverified: false };
+  return { text: trimmed, unverified: isUncertainMasterValue(trimmed) };
+}
+
+export function softenDraftDescription(record: ProductMasterRecord): string {
+  let text = record.shortDescriptionEnDraft.trim();
+  if (isUncertainMasterValue(record.materialComposition)) {
+    text = text.replace(/\b100\s*%\s*/gi, "");
+  }
+  return text
+    .replace(/\bOEKO-TEX\b/gi, "")
+    .replace(/\bOEKO TEX\b/gi, "")
+    .replace(/\b(SGS|BSCI|ETL|RoHS|FCC|CE)\b/gi, "")
+    .replace(/\bcertified\b/gi, "")
+    .replace(/\s{2,}/g, " ")
+    .replace(/\s+([,.;])/g, "$1")
+    .trim();
+}
+
 export function toPublicProductDraft(record: ProductMasterRecord): Product {
+  const material = presentClaim(record.materialComposition);
+  const dimensions = presentClaim(record.dimensionsSizeVariants);
+  const colors = presentClaim(record.colors);
+  const craft = presentClaim(record.craft);
+  const careText = isUnknownMasterValue(record.careLabelEnDraft) ? undefined : record.careLabelEnDraft.trim();
+  const unverifiedFields: UnverifiedSpecField[] = [];
+  if (material.unverified && material.text) unverifiedFields.push("material");
+  if (dimensions.unverified && dimensions.text) unverifiedFields.push("dimensions");
+  if (colors.unverified && colors.text) unverifiedFields.push("colors");
+  if (craft.unverified && craft.text) unverifiedFields.push("craft");
+  const images = productPhotosBySku[record.sku] ?? [];
+  const hero = images[0];
+  if (!hero && record.sku !== "RUG-TERRA-01-SND-160x230") throw new Error(`Missing photos for ${record.sku}`);
+
   return {
     id: record.sku,
     slug: record.sku.toLowerCase(),
     name: draftCopy(record.titleEnDraft),
-    description: draftCopy(record.shortDescriptionEnDraft),
-    material: draftCopy(record.materialComposition),
-    dimensions: draftCopy(record.dimensionsSizeVariants),
-    sizeVariants: draftCopy(record.dimensionsSizeVariants),
-    colors: draftCopy(record.colors),
-    craft: draftCopy(record.craft),
-    care: draftCopy(record.careLabelEnDraft),
+    description: draftCopy(softenDraftDescription(record)),
+    ...(material.text ? { material: draftCopy(material.text) } : {}),
+    ...(dimensions.text ? { dimensions: draftCopy(dimensions.text), sizeVariants: draftCopy(dimensions.text) } : {}),
+    ...(colors.text ? { colors: draftCopy(colors.text) } : {}),
+    ...(craft.text ? { craft: draftCopy(craft.text) } : {}),
+    ...(careText ? { care: draftCopy(careText) } : {}),
+    ...(unverifiedFields.length ? { unverifiedFields } : {}),
     price: 0,
     category: record.catalogCategory,
     available: false,
@@ -125,6 +182,7 @@ export function toPublicProductDraft(record: ProductMasterRecord): Product {
     published: false,
     listingRecommendation: record.listingRecommendation,
     offAssortment: record.offAssortment,
+    ...(hero ? { image: hero.src, images } : { images: [] }),
   };
 }
 
@@ -157,5 +215,16 @@ export const productMasterDrafts: Product[] = productMasterV1.map(toPublicProduc
 for (const draft of productMasterDrafts) {
   if (draft.price !== 0 || draft.available || draft.published !== false || draft.status !== "draft" || draft.featured) {
     throw new Error(`Product master draft ${draft.id} is not locked unpublished`);
+  }
+  if (draft.id === "RUG-TERRA-01-SND-160x230") {
+    if (draft.image || draft.images?.length) throw new Error("RUG-TERRA-01 supplier frames are mismatched and must stay off the storefront");
+    continue;
+  }
+  const hero = draft.images?.[0];
+  if (!draft.image || !hero || hero.src !== draft.image || hero.role !== "hero") {
+    throw new Error(`Product master draft ${draft.id} is missing a hero image`);
+  }
+  if (hero.watermark === "yes" && draft.images?.some((image) => image.watermark !== "yes")) {
+    throw new Error(`Product master draft ${draft.id} uses a watermarked hero`);
   }
 }

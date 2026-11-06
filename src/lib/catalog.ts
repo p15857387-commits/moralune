@@ -10,6 +10,18 @@ export function isPublicCatalogProduct(product: Pick<Product, "status" | "publis
   return true;
 }
 
+/** Shop and PDP listing for this noindex preview. Drafts are visible. Off-assortment rows stay hidden. */
+export function isPreviewListedProduct(product: Pick<Product, "status" | "published" | "listingRecommendation" | "offAssortment">): boolean {
+  if (product.offAssortment) return false;
+  if (product.listingRecommendation && hiddenListing.has(product.listingRecommendation)) return false;
+  if (product.published === false || product.status === "draft") return true;
+  return isPublicCatalogProduct(product);
+}
+
+export function isPreviewDraft(product: Pick<Product, "status" | "published">): boolean {
+  return product.status === "draft" || product.published === false;
+}
+
 export function isPurchasable(product: Pick<Product, "status" | "published" | "listingRecommendation" | "offAssortment" | "available" | "price">): boolean {
   return isPublicCatalogProduct(product) && product.available === true && product.price > 0;
 }
@@ -17,7 +29,7 @@ export function isPurchasable(product: Pick<Product, "status" | "published" | "l
 const storefrontOptionalKeys = [
   "description", "story", "material", "dimensions", "care", "colors", "sizeVariants", "craft",
   "category", "featured", "status", "published", "listingRecommendation", "offAssortment",
-  "shopifyVariantId", "shoppaasBuyUrl", "image", "imageTone",
+  "shopifyVariantId", "shoppaasBuyUrl", "image", "images", "unverifiedFields", "imageTone",
 ] as const;
 
 export function toStorefrontProduct(product: Product): Product {
@@ -59,6 +71,25 @@ export function displayName(value: LocalizedText | undefined, locale: Locale): s
 
 export function formatPrice(price: number, locale: Locale = "zh-CN") {
   return new Intl.NumberFormat(locale, { style: "currency", currency: "CNY", maximumFractionDigits: 0 }).format(price);
+}
+
+/** Confirmed sell price only. Preview drafts stay unpriced, including price 0. */
+export function formatListedPrice(product: Pick<Product, "price" | "status" | "published">, locale: Locale): string | undefined {
+  if (isPreviewDraft(product) || product.price <= 0) return undefined;
+  return formatPrice(product.price, locale);
+}
+
+/**
+ * Category pages prefer supplier drafts when that category has any.
+ * The full shop keeps demo products after the drafts so the page is never empty of known objects.
+ */
+export function productsForShop<T extends Pick<Product, "status" | "published" | "listingRecommendation" | "offAssortment" | "category">>(products: T[], categorySlug?: string): T[] {
+  const listed = products.filter(isPreviewListedProduct);
+  const scoped = categorySlug ? listed.filter((product) => product.category === categorySlug) : listed;
+  const drafts = scoped.filter((product) => isPreviewDraft(product));
+  const published = scoped.filter((product) => !isPreviewDraft(product));
+  if (categorySlug && drafts.length > 0) return drafts;
+  return [...drafts, ...published];
 }
 
 export function snapshotSelection(items: SelectionItem[], products: Pick<Product, "id" | "slug" | "name" | "price" | "available" | "status" | "published" | "listingRecommendation" | "offAssortment">[], locale: Locale) {

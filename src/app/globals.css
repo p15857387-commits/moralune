@@ -357,3 +357,13 @@
   .room-look-slide.is-active .room-look-still.is-alive{animation:none}
   .category-entry img{transition:none}
 }
+
+.preview-notice{margin:0 0 28px;padding:12px 16px;background:var(--soft-clay);color:var(--ink);font-size:13px;line-height:1.55;border-left:2px solid var(--blue)}
+.product-gallery{display:flex;flex-direction:column;min-width:0;background:var(--soft-clay)}
+.product-thumbs{display:flex;gap:8px;padding:10px 12px 12px;overflow-x:auto}
+.product-thumbs button{position:relative;width:72px;height:72px;flex:none;padding:0;border:1px solid transparent;background:var(--moon-mist);cursor:pointer}
+.product-thumbs button[aria-pressed="true"]{border-color:var(--blue)}
+.status-pill.is-preview{color:var(--blue);letter-spacing:.12em;text-transform:uppercase}
+.detail-price-preview{color:var(--muted);font-family:var(--serif);font-size:18px}
+.spec-caveat{margin:0 0 8px;color:var(--muted);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+.product-image-fallback,.photo-fallback{position:absolute;inset:0;display:grid;place-items:center;margin:0;padding:24px;text-align:center;color:var(--muted);background:var(--soft-clay);font-family:var(--serif);font-size:clamp(18px,2vw,28px);line-height:1.35}

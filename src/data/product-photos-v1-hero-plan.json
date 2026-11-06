@@ -1,0 +1,617 @@
+[
+  {
+    "sku": "CSH-BOUC-01-IVR-45x45",
+    "hero": "main-01.webp",
+    "hero_wm": "no",
+    "gallery": [
+      "main-01.webp",
+      "detail-01.webp",
+      "detail-02.webp",
+      "detail-03.webp",
+      "detail-04.webp",
+      "detail-05.webp"
+    ]
+  },
+  {
+    "sku": "CSH-BOUC-02-OAT-30x50",
+    "hero": "main-01.webp",
+    "hero_wm": "no",
+    "gallery": [
+      "main-01.webp",
+      "detail-01.webp",
+      "detail-02.webp",
+      "detail-03.webp",
+      "detail-04.webp",
+      "detail-05.webp"
+    ]
+  },
+  {
+    "sku": "CSH-LINO-01-NAT-45x45",
+    "hero": "main-01.webp",
+    "hero_wm": "no",
+    "gallery": [
+      "main-01.webp",
+      "detail-01.webp",
+      "detail-02.webp",
+      "detail-03.webp",
+      "detail-04.webp",
+      "detail-05.webp"
+    ]
+  },
+  {
+    "sku": "CSH-VELA-01-RST-45x45",
+    "hero": "main-01.webp",
+    "hero_wm": "no",
+    "gallery": [
+      "main-01.webp",
+      "detail-01.webp",
+      "detail-02.webp",
+      "detail-03.webp",
+      "detail-04.webp",
+      "detail-05.webp"
+    ]
+  },
+  {
+    "sku": "CSH-VELA-02-OLV-45x45",
+    "hero": "main-01.webp",
+    "hero_wm": "no",
+    "gallery": [
+      "main-01.webp",
+      "detail-01.webp",
+      "detail-02.webp",
+      "detail-03.webp",
+      "detail-04.webp",
+      "detail-05.webp"
+    ]
+  },
+  {
+    "sku": "CSH-WEAV-01-SND-45x45",
+    "hero": "main-01.webp",
+    "hero_wm": "no",
+    "gallery": [
+      "main-01.webp",
+      "detail-01.webp",
+      "detail-02.webp",
+      "detail-03.webp",
+      "detail-04.webp",
+      "detail-05.webp"
+    ]
+  },
+  {
+    "sku": "LGT-ORLA-01-BLK-D41xH70-US",
+    "hero": "main-01.jpg",
+    "hero_wm": "no",
+    "gallery": [
+      "main-01.jpg",
+      "detail-01.webp",
+      "detail-02.webp",
+      "detail-03.webp",
+      "detail-04.webp"
+    ]
+  },
+  {
+    "sku": "LGT-ORLA-02-WHT-STD-UK",
+    "hero": "main-01.jpg",
+    "hero_wm": "suspected",
+    "gallery": [
+      "main-01.jpg",
+      "detail-01.webp",
+      "detail-02.webp",
+      "detail-03.webp",
+      "detail-04.webp",
+      "detail-05.webp"
+    ]
+  },
+  {
+    "sku": "LGT-ORLA-03-WHT-OVL-UK",
+    "hero": "main-01.jpg",
+    "hero_wm": "suspected",
+    "gallery": [
+      "main-01.jpg"
+    ]
+  },
+  {
+    "sku": "LGT-ORLA-04-NAT-D35xH40-US",
+    "hero": "detail-01.webp",
+    "hero_wm": "suspected",
+    "gallery": [
+      "detail-01.webp",
+      "detail-02.webp",
+      "detail-03.webp"
+    ]
+  },
+  {
+    "sku": "LGT-PLIS-01-RED-STD-US",
+    "hero": "main-01.jpg",
+    "hero_wm": "suspected",
+    "gallery": [
+      "main-01.jpg",
+      "detail-01.webp",
+      "detail-02.webp",
+      "detail-03.webp",
+      "detail-04.webp",
+      "detail-05.webp"
+    ]
+  },
+  {
+    "sku": "LGT-PLIS-02-IVR-STD-US",
+    "hero": "main-01.jpg",
+    "hero_wm": "suspected",
+    "gallery": [
+      "main-01.jpg",
+      "detail-01.webp",
+      "detail-02.webp",
+      "detail-03.webp",
+      "detail-04.webp",
+      "detail-05.webp"
+    ]
+  },
+  {
+    "sku": "LGT-PLIS-03-GRN-STD-US",
+    "hero": "detail-02.png",
+    "hero_wm": "suspected",
+    "gallery": [
+      "detail-02.png",
+      "detail-03.png",
+      "detail-04.png",
+      "detail-05.png"
+    ]
+  },
+  {
+    "sku": "LGT-TRAV-01-BEI-D20xH50-UK",
+    "hero": "main-01.jpg",
+    "hero_wm": "suspected",
+    "gallery": [
+      "main-01.jpg",
+      "detail-01.webp",
+      "detail-02.webp",
+      "detail-03.webp",
+      "detail-04.webp",
+      "detail-05.webp"
+    ]
+  },
+  {
+    "sku": "LGT-TRAV-02-BEI-MSH-UK",
+    "hero": "main-01.jpg",
+    "hero_wm": "suspected",
+    "gallery": [
+      "main-01.jpg",
+      "detail-01.webp",
+      "detail-02.webp",
+      "detail-03.webp",
+      "detail-04.webp",
+      "detail-05.webp"
+    ]
+  },
+  {
+    "sku": "LGT-TRAV-03-BEI-STD-US",
+    "hero": "main-01.jpg",
+    "hero_wm": "suspected",
+    "gallery": [
+      "main-01.jpg",
+      "detail-01.webp",
+      "detail-02.webp",
+      "detail-03.webp",
+      "detail-04.webp",
+      "detail-05.webp"
+    ]
+  },
+  {
+    "sku": "OBJ-GLAS-01-GRN-H25",
+    "hero": "main-01.jpg",
+    "hero_wm": "suspected",
+    "gallery": [
+      "main-01.jpg",
+      "detail-03.webp",
+      "detail-04.webp",
+      "detail-05.webp"
+    ]
+  },
+  {
+    "sku": "OBJ-KILN-01-CLY-H30",
+    "hero": "detail-01.webp",
+    "hero_wm": "suspected",
+    "gallery": [
+      "detail-01.webp",
+      "detail-02.webp",
+      "detail-03.webp",
+      "detail-04.webp",
+      "detail-05.webp"
+    ]
+  },
+  {
+    "sku": "OBJ-KILN-02-BEI-M",
+    "hero": "main-01.jpg",
+    "hero_wm": "suspected",
+    "gallery": [
+      "main-01.jpg",
+      "detail-04.webp",
+      "detail-05.webp"
+    ]
+  },
+  {
+    "sku": "OBJ-KILN-03-RST-H15",
+    "hero": "main-01.jpg",
+    "hero_wm": "suspected",
+    "gallery": [
+      "main-01.jpg",
+      "detail-01.webp",
+      "detail-02.webp",
+      "detail-03.webp",
+      "detail-04.webp",
+      "detail-05.webp"
+    ]
+  },
+  {
+    "sku": "OBJ-KILN-04-WHT-17x28",
+    "hero": "main-01.jpg",
+    "hero_wm": "suspected",
+    "gallery": [
+      "main-01.jpg",
+      "detail-01.webp",
+      "detail-02.webp",
+      "detail-03.webp",
+      "detail-04.webp",
+      "detail-05.webp"
+    ]
+  },
+  {
+    "sku": "OBJ-KILN-05-WHT-H20",
+    "hero": "main-01.jpg",
+    "hero_wm": "suspected",
+    "gallery": [
+      "main-01.jpg",
+      "detail-01.webp",
+      "detail-02.webp",
+      "detail-03.webp",
+      "detail-04.webp",
+      "detail-05.webp"
+    ]
+  },
+  {
+    "sku": "OBJ-KILN-06-GRN-D15xH20",
+    "hero": "main-01.webp",
+    "hero_wm": "no",
+    "gallery": [
+      "main-01.webp",
+      "detail-01.webp",
+      "detail-02.webp",
+      "detail-03.webp",
+      "detail-04.webp",
+      "detail-05.webp"
+    ]
+  },
+  {
+    "sku": "OBJ-SCUL-01-BEI-31x24",
+    "hero": "detail-01.webp",
+    "hero_wm": "suspected",
+    "gallery": [
+      "detail-01.webp",
+      "detail-02.webp",
+      "detail-03.webp",
+      "detail-04.webp",
+      "detail-05.webp"
+    ]
+  },
+  {
+    "sku": "OBJ-STON-01-BEI-S",
+    "hero": "main-01.jpg",
+    "hero_wm": "suspected",
+    "gallery": [
+      "main-01.jpg",
+      "detail-01.webp",
+      "detail-02.webp",
+      "detail-03.webp",
+      "detail-04.webp",
+      "detail-05.webp"
+    ]
+  },
+  {
+    "sku": "OBJ-WOOD-01-NAT-33x13",
+    "hero": "main-01.jpg",
+    "hero_wm": "suspected",
+    "gallery": [
+      "main-01.jpg",
+      "detail-01.webp",
+      "detail-02.webp",
+      "detail-03.webp",
+      "detail-04.webp",
+      "detail-05.webp"
+    ]
+  },
+  {
+    "sku": "RUG-KLIM-01-MUL-160x230",
+    "hero": "main-01.jpg",
+    "hero_wm": "suspected",
+    "gallery": [
+      "main-01.jpg",
+      "detail-01.webp",
+      "detail-02.webp",
+      "detail-03.webp",
+      "detail-04.webp",
+      "detail-05.webp"
+    ]
+  },
+  {
+    "sku": "RUG-SAHL-01-NAT-160x230",
+    "hero": "main-01.jpg",
+    "hero_wm": "no",
+    "gallery": [
+      "main-01.jpg",
+      "detail-01.webp",
+      "detail-02.webp",
+      "detail-03.webp",
+      "detail-04.webp",
+      "detail-05.webp"
+    ]
+  },
+  {
+    "sku": "RUG-SAHL-02-NAT-160x230",
+    "hero": "main-01.jpg",
+    "hero_wm": "suspected",
+    "gallery": [
+      "main-01.jpg",
+      "detail-01.webp",
+      "detail-02.webp",
+      "detail-03.webp",
+      "detail-04.webp",
+      "detail-05.webp"
+    ]
+  },
+  {
+    "sku": "RUG-SAHL-03-NAT-D120",
+    "hero": "main-01.jpg",
+    "hero_wm": "suspected",
+    "gallery": [
+      "main-01.jpg",
+      "detail-01.webp",
+      "detail-02.webp",
+      "detail-03.webp",
+      "detail-04.webp",
+      "detail-05.webp"
+    ]
+  },
+  {
+    "sku": "RUG-TERRA-01-SND-160x230",
+    "hero": "detail-01.webp",
+    "hero_wm": "suspected",
+    "gallery": [
+      "detail-01.webp",
+      "detail-02.webp",
+      "detail-03.webp",
+      "detail-04.webp",
+      "detail-05.webp"
+    ]
+  },
+  {
+    "sku": "RUG-TERRA-02-RST-160x230",
+    "hero": "main-01.jpg",
+    "hero_wm": "suspected",
+    "gallery": [
+      "main-01.jpg",
+      "detail-01.webp",
+      "detail-02.webp",
+      "detail-03.webp",
+      "detail-04.webp",
+      "detail-05.webp"
+    ]
+  },
+  {
+    "sku": "RUG-TERRA-03-OAT-160x230",
+    "hero": "main-01.jpg",
+    "hero_wm": "suspected",
+    "gallery": [
+      "main-01.jpg",
+      "detail-01.webp",
+      "detail-02.webp",
+      "detail-03.webp",
+      "detail-04.webp",
+      "detail-05.webp"
+    ]
+  },
+  {
+    "sku": "RUG-TERRA-04-CLY-160x230",
+    "hero": "detail-01.webp",
+    "hero_wm": "suspected",
+    "gallery": [
+      "detail-01.webp",
+      "detail-02.webp",
+      "detail-03.webp",
+      "detail-04.webp",
+      "detail-05.webp"
+    ]
+  },
+  {
+    "sku": "RUG-TERRA-05-IVR-160x230",
+    "hero": "main-01.jpg",
+    "hero_wm": "suspected",
+    "gallery": [
+      "main-01.jpg",
+      "detail-01.webp",
+      "detail-02.webp",
+      "detail-03.webp",
+      "detail-04.webp",
+      "detail-05.webp"
+    ]
+  },
+  {
+    "sku": "RUG-TERRA-06-OLV-160x230",
+    "hero": "main-01.jpg",
+    "hero_wm": "suspected",
+    "gallery": [
+      "main-01.jpg",
+      "detail-01.webp",
+      "detail-02.webp",
+      "detail-03.webp",
+      "detail-04.webp",
+      "detail-05.webp"
+    ]
+  },
+  {
+    "sku": "THR-LINO-01-NAT-130x170",
+    "hero": "main-01.jpg",
+    "hero_wm": "no",
+    "gallery": [
+      "main-01.jpg"
+    ]
+  },
+  {
+    "sku": "THR-LINO-02-OAT-130x170",
+    "hero": "main-01.jpg",
+    "hero_wm": "suspected",
+    "gallery": [
+      "main-01.jpg"
+    ]
+  },
+  {
+    "sku": "THR-LINO-03-CLY-120x150",
+    "hero": "main-01.webp",
+    "hero_wm": "no",
+    "gallery": [
+      "main-01.webp",
+      "detail-01.webp",
+      "detail-02.webp",
+      "detail-03.webp",
+      "detail-04.webp",
+      "detail-05.webp"
+    ]
+  },
+  {
+    "sku": "THR-WAFL-01-SND-130x170",
+    "hero": "main-01.jpg",
+    "hero_wm": "yes",
+    "gallery": [
+      "main-01.jpg"
+    ]
+  },
+  {
+    "sku": "WAL-LOOM-01-NAT-68x40",
+    "hero": "main-01.jpg",
+    "hero_wm": "no",
+    "gallery": [
+      "main-01.jpg",
+      "detail-01.jpg",
+      "detail-02.webp",
+      "detail-03.webp",
+      "detail-04.webp",
+      "detail-05.webp"
+    ]
+  },
+  {
+    "sku": "WAL-LOOM-02-NAT-35x34",
+    "hero": "main-01.jpg",
+    "hero_wm": "suspected",
+    "gallery": [
+      "main-01.jpg",
+      "detail-01.jpg",
+      "detail-02.webp",
+      "detail-03.webp",
+      "detail-04.webp",
+      "detail-05.webp"
+    ]
+  },
+  {
+    "sku": "WAL-LOOM-03-NAT-35x35",
+    "hero": "main-01.jpg",
+    "hero_wm": "suspected",
+    "gallery": [
+      "main-01.jpg",
+      "detail-01.jpg",
+      "detail-02.webp",
+      "detail-03.webp",
+      "detail-04.webp",
+      "detail-05.webp"
+    ]
+  },
+  {
+    "sku": "WAL-RELF-01-IVR-90x120",
+    "hero": "main-01.jpg",
+    "hero_wm": "no",
+    "gallery": [
+      "main-01.jpg",
+      "detail-01.webp",
+      "detail-02.webp",
+      "detail-03.webp",
+      "detail-04.webp",
+      "detail-05.webp"
+    ]
+  },
+  {
+    "sku": "WAL-RELF-02-MUL-90x120",
+    "hero": "main-01.jpg",
+    "hero_wm": "suspected",
+    "gallery": [
+      "main-01.jpg",
+      "detail-01.webp",
+      "detail-02.webp",
+      "detail-03.webp",
+      "detail-04.webp",
+      "detail-05.webp"
+    ]
+  },
+  {
+    "sku": "WAL-RELF-03-TER-90x120",
+    "hero": "main-01.jpg",
+    "hero_wm": "suspected",
+    "gallery": [
+      "main-01.jpg",
+      "detail-01.webp",
+      "detail-02.webp",
+      "detail-03.webp",
+      "detail-04.webp",
+      "detail-05.webp"
+    ]
+  },
+  {
+    "sku": "WAL-RELF-04-SND-90x120",
+    "hero": "main-01.jpg",
+    "hero_wm": "suspected",
+    "gallery": [
+      "main-01.jpg",
+      "detail-01.webp",
+      "detail-02.webp",
+      "detail-03.webp",
+      "detail-04.webp",
+      "detail-05.webp"
+    ]
+  },
+  {
+    "sku": "WAL-RELF-05-MUL-90x120",
+    "hero": "main-01.jpg",
+    "hero_wm": "suspected",
+    "gallery": [
+      "main-01.jpg",
+      "detail-01.webp",
+      "detail-02.webp",
+      "detail-03.webp",
+      "detail-04.webp",
+      "detail-05.webp"
+    ]
+  },
+  {
+    "sku": "WAL-RELF-06-OLV-90x120",
+    "hero": "main-01.jpg",
+    "hero_wm": "suspected",
+    "gallery": [
+      "main-01.jpg",
+      "detail-01.jpg",
+      "detail-02.webp",
+      "detail-03.webp",
+      "detail-04.webp",
+      "detail-05.webp"
+    ]
+  },
+  {
+    "sku": "WAL-RELF-07-RST-120x180",
+    "hero": "main-01.jpg",
+    "hero_wm": "suspected",
+    "gallery": [
+      "main-01.jpg",
+      "detail-01.webp",
+      "detail-02.webp",
+      "detail-03.webp",
+      "detail-04.webp",
+      "detail-05.webp"
+    ]
+  }
+]
