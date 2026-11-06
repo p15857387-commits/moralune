@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   description: "MORALUNE — objects for everyday living. Rugs, textiles, wall, objects, and light. 为日常，选一点刚刚好的美。",
   icons: {
     icon: [
-      { url: "/favicon.ico", type: "image/x-icon", sizes: "48x48" },
+      { url: "/favicon.ico", type: "image/x-icon", sizes: "32x32" },
       { url: "/favicon-32.png", type: "image/png", sizes: "32x32" },
     ],
     apple: [{ url: "/apple-touch-icon.png", type: "image/png", sizes: "180x180" }],
