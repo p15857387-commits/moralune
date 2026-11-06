@@ -1,6 +1,10 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { brand } from "@/lib/brand";
+
+export const viewport: Viewport = {
+  themeColor: "#F4F1EC",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"),
@@ -9,14 +13,8 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: "/favicon.ico", type: "image/x-icon", sizes: "48x48" },
-      { url: "/favicon-16.png", type: "image/png", sizes: "16x16" },
       { url: "/favicon-32.png", type: "image/png", sizes: "32x32" },
-      { url: "/favicon-48.png", type: "image/png", sizes: "48x48" },
-      { url: "/favicon-180.png", type: "image/png", sizes: "180x180" },
-      { url: "/favicon-192.png", type: "image/png", sizes: "192x192" },
-      { url: "/favicon-512.png", type: "image/png", sizes: "512x512" },
     ],
-    shortcut: "/favicon.ico",
     apple: [{ url: "/apple-touch-icon.png", type: "image/png", sizes: "180x180" }],
   },
 };
