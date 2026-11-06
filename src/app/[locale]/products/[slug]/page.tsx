@@ -7,14 +7,14 @@ import { ProductPurchase } from "@/components/product-purchase";
 import { ProductGrid } from "@/components/product-grid";
 import { products as fallbackProducts } from "@/data/catalog";
 import { getCatalogProduct } from "@/lib/catalog-source";
-import { displayName, formatPrice, localize } from "@/lib/catalog";
+import { displayName, formatPrice, isPublicCatalogProduct, localize } from "@/lib/catalog";
 import { isLocale, locales, t } from "@/lib/i18n";
 import { env, hasShoppaas } from "@/lib/env";
 
 type Props = { params: Promise<{ locale: string; slug: string }> };
 
 export function generateStaticParams() {
-  return locales.flatMap((locale) => fallbackProducts.map((product) => ({ locale, slug: product.slug })));
+  return locales.flatMap((locale) => fallbackProducts.filter(isPublicCatalogProduct).map((product) => ({ locale, slug: product.slug })));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -29,7 +29,7 @@ export default async function ProductPage({ params }: Props) {
   if (!isLocale(locale)) notFound();
   const catalog = await getCatalogProduct(slug);
   const product = catalog.product;
-  if (!product) notFound();
+  if (!product || !isPublicCatalogProduct(product)) notFound();
   const copy = t(locale);
   const zh = locale === "zh-CN";
   const related = catalog.products.filter((item) => item.id !== product.id && item.category === product.category).slice(0, 3);

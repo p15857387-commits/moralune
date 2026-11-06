@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
+import { isPurchasable } from "@/lib/catalog";
 import { env, payPalCheckoutEnabled, paypalPriceMap } from "@/lib/env";
 import { getCatalog } from "@/lib/catalog-source";
 import { createPayPalOrder } from "@/lib/paypal";
@@ -22,7 +23,7 @@ export async function POST(request: Request) {
 
   const catalog = await getCatalog();
   const selected = parsed.data.items.map((item) => ({ item, product: catalog.products.find((product) => product.id === item.productId) }));
-  const unavailable = selected.filter(({ product }) => !product || !product.available);
+  const unavailable = selected.filter(({ product }) => !product || !isPurchasable(product));
   if (unavailable.length) return NextResponse.json({ error: "One or more selected products are unavailable" }, { status: 409 });
 
   const missingUsdPrice = selected.filter(({ item }) => !paypalPriceMap[item.productId]);

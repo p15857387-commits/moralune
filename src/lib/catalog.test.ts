@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { categories } from "@/data/catalog";
-import { displayName, localize, snapshotSelection, sortCategories } from "./catalog";
+import { displayName, isPurchasable, isPublicCatalogProduct, localize, snapshotSelection, sortCategories } from "./catalog";
 
 describe("catalog", () => {
   it("localizes content and falls back to Chinese", () => {
@@ -38,5 +38,21 @@ describe("catalog", () => {
   it("marks missing and unavailable products", () => {
     const products = [{ id: "p1", slug: "tray", name: { "zh-CN": "木托盘", en: "Tray" }, price: 199, available: false }];
     expect(snapshotSelection([{ productId: "p1", quantity: 1 }, { productId: "gone", quantity: 1 }], products, "zh-CN").unavailableIds).toEqual(["p1", "gone"]);
+  });
+
+  it("refuses drafts, do-not-list rows, and zero prices", () => {
+    const name = { "zh-CN": "", en: "Draft rug" };
+    const draft = { id: "RUG-TERRA-01", slug: "rug-terra-01", name, price: 480, available: true, status: "draft" as const, published: false };
+    const offAssortment = { id: "WAL-LOOM-01", slug: "wal-loom-01", name, price: 68, available: true, listingRecommendation: "do-not-list" as const, offAssortment: true };
+    const unpriced = { id: "free", slug: "free", name, price: 0, available: true };
+    expect(isPublicCatalogProduct(draft)).toBe(false);
+    expect(isPurchasable(draft)).toBe(false);
+    expect(isPurchasable(offAssortment)).toBe(false);
+    expect(isPurchasable(unpriced)).toBe(false);
+    expect(snapshotSelection(
+      [draft, offAssortment, unpriced].map((product) => ({ productId: product.id, quantity: 1 })),
+      [draft, offAssortment, unpriced],
+      "en",
+    ).unavailableIds).toEqual(["RUG-TERRA-01", "WAL-LOOM-01", "free"]);
   });
 });

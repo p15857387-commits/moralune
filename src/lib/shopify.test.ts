@@ -29,6 +29,16 @@ describe("shopify checkout", () => {
     });
   });
 
+  it("rejects unpublished drafts before building a cart", () => {
+    expect(buildShopifyCartLines([{ productId: "draft", quantity: 1 }], [
+      product({ id: "draft", status: "draft", published: false, available: true }),
+    ])).toEqual({
+      lines: [],
+      unavailableIds: ["draft"],
+      unmappedIds: [],
+    });
+  });
+
   it("rejects unavailable or unmapped products before calling Shopify", () => {
     expect(buildShopifyCartLines([
       { productId: "unavailable", quantity: 1 },

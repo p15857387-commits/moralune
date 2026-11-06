@@ -6,10 +6,13 @@ export const categories: Category[] = [
   { id: "art-rugs", slug: "art-rugs", name: text("块毯", "Rugs"), description: text("羊毛与织纹，铺在地面上的安静一层。", "Wool and weave for the floor.") },
   { id: "cushions-throws", slug: "cushions-throws", name: text("抱枕与披肩", "Cushions & Throws"), description: text("沙发与床上的柔软一层。", "Soft layers for the sofa and bed.") },
   { id: "wall-art", slug: "wall-art", name: text("墙面", "Wall"), description: text("给墙面留一件安静的作品。", "Hangings and works for a quiet wall.") },
+  // artful-storage is the storefront slug for objects / small decor. Product-master OBJ rows map here.
   { id: "artful-storage", slug: "artful-storage", name: text("器物", "Objects"), description: text("桌面、玄关与层架上的小器物。", "Small pieces for the table, entry, and shelf.") },
   { id: "decorative-lighting", slug: "decorative-lighting", name: text("灯具", "Lighting"), description: text("让房间保持柔和的灯。", "Lamps that keep a room soft.") },
 ];
 
+// Published demo assortment. Client components import this module, so unpublished
+// product-master drafts stay in product-master-v1.ts and out of this array.
 export const products: Product[] = [
   {
     id: "indigo-tide-rug", slug: "indigo-tide-wool-rug", category: "art-rugs", price: 4280, available: true, featured: true,

@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { isPurchasable } from "@/lib/catalog";
 import type { Product, SelectionItem } from "@/types";
 
 export const shopifyCheckoutSchema = z.object({
@@ -11,7 +12,7 @@ type Fetcher = typeof fetch;
 
 export function buildShopifyCartLines(
   items: SelectionItem[],
-  products: Pick<Product, "id" | "available" | "shopifyVariantId">[],
+  products: Pick<Product, "id" | "available" | "price" | "shopifyVariantId" | "status" | "published" | "listingRecommendation" | "offAssortment">[],
 ) {
   const lines: ShopifyCartLine[] = [];
   const unavailableIds: string[] = [];
@@ -19,7 +20,7 @@ export function buildShopifyCartLines(
 
   for (const item of items) {
     const product = products.find((candidate) => candidate.id === item.productId);
-    if (!product || !product.available) {
+    if (!product || !isPurchasable(product)) {
       unavailableIds.push(item.productId);
       continue;
     }
