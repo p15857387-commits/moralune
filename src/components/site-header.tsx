@@ -5,7 +5,7 @@ import { MobileMenu } from "./mobile-menu";
 import { t } from "@/lib/i18n";
 import { localize } from "@/lib/catalog";
 import type { Category, Locale } from "@/types";
-import { brand } from "@/lib/brand";
+import { brand, wordmarks } from "@/lib/brand";
 
 export function SiteHeader({ locale, categories }: { locale: Locale; categories: Category[] }) {
   const copy = t(locale);
@@ -22,7 +22,7 @@ export function SiteHeader({ locale, categories }: { locale: Locale; categories:
       <div className="announcement"><span>{locale === "zh-CN" ? "为日常，选一点刚刚好的美" : "A little beauty, chosen for everyday living"}</span></div>
       <div className="header-inner">
         <Link className="wordmark ml-wordmark" href={`/${locale}`} aria-label={brand.zh}>
-          <span className="brand-logo-window"><img src="/moralune-wordmark.png" alt={brand.zh} /></span>
+          <span className="brand-logo-window"><img src={wordmarks.light} alt={brand.zh} /></span>
           <small>{brand.en}</small>
         </Link>
         <nav className="desktop-nav" aria-label="Primary navigation">

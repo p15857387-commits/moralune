@@ -73,13 +73,13 @@
 /* MORALUNE campaign sequence — four consecutive, full-width image stories. */
 .site-header{position:sticky;top:0;background:rgba(244,241,236,.96);backdrop-filter:blur(12px)}
 
-/* Brand v0.2.1 wordmark is already cropped to the artwork (transparent, moralune Blue). */
+/* v2 wordmarks are 2043×770 canvases. Lettering is x 217–1812, y 196–564. Frame that box in the existing slot. */
 .ml-wordmark{gap:9px}
-.brand-logo-window{position:relative;display:block;width:130px;height:30px;overflow:hidden;flex:none}
-.brand-logo-window img{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:contain}
+.brand-logo-window{position:relative;display:block;width:130px;height:30px;overflow:hidden;flex:none;container-type:size}
+.brand-logo-window img,.footer-mark img{position:absolute;max-width:none;height:209.2391%;width:auto;top:-53.2609%;left:50%;transform:translateX(-50%);object-fit:fill}
 .ml-wordmark small{min-width:0;padding-left:10px;font-size:7px;letter-spacing:.15em;white-space:nowrap}
-.footer-mark{width:130px;height:30px;position:relative;overflow:hidden;margin-bottom:20px}
-.footer-mark img{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:contain}
+.footer-mark{width:130px;height:30px;position:relative;overflow:hidden;margin-bottom:20px;container-type:size}
+@container (max-aspect-ratio: 4.334){.brand-logo-window img,.footer-mark img{width:128.0878%;height:auto;left:-13.605%;top:50%;transform:translateY(-50%)}}
 @media(max-width:760px){.brand-logo-window{width:88px;height:20px}.ml-wordmark small{display:none}.footer-mark{width:108px;height:23.5px}}
 @media(max-width:420px){.brand-logo-window{width:69px;height:17.5px}}
 .home-hero{display:block;height:clamp(480px,38vw,630px);min-height:480px;max-height:630px;padding:0;overflow:hidden;color:#fff}

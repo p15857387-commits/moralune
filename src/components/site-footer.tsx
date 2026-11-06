@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { wordmarks } from "@/lib/brand";
 import type { Locale } from "@/types";
 
 const helpLinks = [
@@ -15,7 +16,7 @@ export function SiteFooter({ locale }: { locale: Locale }) {
     <footer className="site-footer">
       <div className="footer-main page-shell">
         <div className="footer-brand">
-          <div className="footer-mark"><img src="/moralune-wordmark.png" alt="MORALUNE" /></div>
+          <div className="footer-mark"><img src={wordmarks.light} alt="MORALUNE" /></div>
           <p>{zh ? "为日常，选一点刚刚好的美。" : "A little beauty, chosen for everyday living."}</p>
         </div>
         <div className="footer-links">
