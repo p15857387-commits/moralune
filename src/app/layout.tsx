@@ -5,7 +5,7 @@ import { brand } from "@/lib/brand";
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"),
   title: { default: `${brand.zh} ${brand.en}`, template: `%s · ${brand.zh}` },
-  description: "为日常，选一点刚刚好的美。MORALUNE 汇集具有设计感的多元家居物件与生活好物。",
+  description: "MORALUNE — objects for everyday living. Rugs, textiles, wall, objects, and light. 为日常，选一点刚刚好的美。",
   icons: {
     icon: [
       { url: "/favicon-32.png", type: "image/png", sizes: "32x32" },
