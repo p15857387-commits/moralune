@@ -1,5 +1,16 @@
 import { expect, test } from "@playwright/test";
 
+test("root opens the English home and language switch still reaches Chinese", async ({ page }) => {
+  await page.goto("/");
+  await expect(page).toHaveURL(/\/en\/?$/);
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("everyday living");
+  await page.getByRole("link", { name: "切换到中文" }).click();
+  await expect(page).toHaveURL(/\/zh-CN\/?$/);
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("刚刚好的美");
+  await page.getByRole("link", { name: "Switch to English" }).click();
+  await expect(page).toHaveURL(/\/en\/?$/);
+});
+
 test("browse, select and submit an inquiry", async ({ page }) => {
   await page.goto("/zh-CN");
   await page.getByRole("link", { name: "探索" }).first().click();

@@ -8,13 +8,13 @@ import { ProductGrid } from "@/components/product-grid";
 import { products as fallbackProducts } from "@/data/catalog";
 import { getCatalogProduct } from "@/lib/catalog-source";
 import { displayName, formatPrice, localize } from "@/lib/catalog";
-import { isLocale, t } from "@/lib/i18n";
+import { isLocale, locales, t } from "@/lib/i18n";
 import { env, hasShoppaas } from "@/lib/env";
 
 type Props = { params: Promise<{ locale: string; slug: string }> };
 
 export function generateStaticParams() {
-  return ["zh-CN", "en"].flatMap((locale) => fallbackProducts.map((product) => ({ locale, slug: product.slug })));
+  return locales.flatMap((locale) => fallbackProducts.map((product) => ({ locale, slug: product.slug })));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
