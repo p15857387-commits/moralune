@@ -1,6 +1,7 @@
 import type { Locale } from "@/types";
 
-export const locales: Locale[] = ["zh-CN", "en"];
+export const defaultLocale: Locale = "en";
+export const locales: Locale[] = [defaultLocale, "zh-CN"];
 export const isLocale = (value: string): value is Locale => locales.includes(value as Locale);
 
 const dictionary = {
