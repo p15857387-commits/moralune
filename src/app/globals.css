@@ -73,7 +73,7 @@
 /* MORALUNE campaign sequence — four consecutive, full-width image stories. */
 .site-header{position:sticky;top:0;background:rgba(244,241,236,.96);backdrop-filter:blur(12px)}
 
-/* Brand v0.2.1 wordmark is already cropped to the artwork (transparent, moralune Blue). */
+/* Brand v2 wordmark file is trimmed to the lettering (transparent, moralune Blue) so this slot frames it. */
 .ml-wordmark{gap:9px}
 .brand-logo-window{position:relative;display:block;width:130px;height:30px;overflow:hidden;flex:none}
 .brand-logo-window img{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:contain}
