@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
-import { products as fallbackProducts } from "@/data/catalog";
 import { snapshotSelection } from "@/lib/catalog";
+import { listPublicFallbackProducts } from "@/lib/catalog-source";
 import { env, hasEmail, hasSanity } from "@/lib/env";
 import { escapeEmailHtml, inquirySchema, makeReference } from "@/lib/inquiry";
 import { sanityClient } from "@/lib/sanity";
@@ -12,9 +12,9 @@ export async function POST(request: Request) {
   if (!parsed.success) return NextResponse.json({ error: "Invalid inquiry details", issues: parsed.error.flatten() }, { status: 400 });
   const input = parsed.data;
 
-  let trustedProducts: Product[] = fallbackProducts;
+  let trustedProducts: Product[] = listPublicFallbackProducts();
   if (hasSanity && sanityClient) {
-    trustedProducts = await sanityClient.fetch(`*[_type == "product" && _id in $ids]{"id": _id, "slug": slug.current, name, price, available}`,
+    trustedProducts = await sanityClient.fetch(`*[_type == "product" && _id in $ids && published != false && status != "draft" && listingRecommendation != "do-not-list" && listingRecommendation != "off-assortment" && offAssortment != true]{"id": _id, "slug": slug.current, name, price, available, status, published, listingRecommendation, offAssortment}`,
       { ids: input.items.map((item) => item.productId) });
   }
   const snapshot = snapshotSelection(input.items, trustedProducts, input.locale);

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ProductGrid } from "@/components/product-grid";
 import { getCatalog } from "@/lib/catalog-source";
-import { localize, sortCategories } from "@/lib/catalog";
+import { isPublicCatalogProduct, localize, sortCategories } from "@/lib/catalog";
 import { isLocale } from "@/lib/i18n";
 
 type Props = { params: Promise<{ locale: string }>; searchParams: Promise<{ category?: string }> };
@@ -24,7 +24,8 @@ export default async function ShopPage({ params, searchParams }: Props) {
   const { categories, products } = await getCatalog();
   const ordered = sortCategories(categories);
   const active = ordered.find((item) => item.slug === category);
-  const visible = active ? products.filter((product) => product.category === active.slug) : products;
+  const listed = products.filter(isPublicCatalogProduct);
+  const visible = active ? listed.filter((product) => product.category === active.slug) : listed;
   const title = active ? localize(active.name, locale) : zh ? "全部选物" : "Shop";
   const lead = active
     ? localize(active.description, locale)

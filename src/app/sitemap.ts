@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { products } from "@/data/catalog";
+import { isPublicCatalogProduct } from "@/lib/catalog";
 import { locales } from "@/lib/i18n";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -12,7 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: page === "" ? "weekly" as const : "monthly" as const,
       alternates: { languages: { "zh-CN": `${base}/zh-CN${page}`, en: `${base}/en${page}` } },
     }))),
-    ...locales.flatMap((locale) => products.map((product) => ({
+    ...locales.flatMap((locale) => products.filter(isPublicCatalogProduct).map((product) => ({
       url: `${base}/${locale}/products/${product.slug}`,
       lastModified: new Date(),
       changeFrequency: "monthly" as const,

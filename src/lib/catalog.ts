@@ -1,5 +1,40 @@
 import type { Locale, LocalizedText, Product, SelectionItem, SnapshotItem } from "@/types";
 
+const hiddenListing = new Set(["do-not-list", "off-assortment"]);
+
+export function isPublicCatalogProduct(product: Pick<Product, "status" | "published" | "listingRecommendation" | "offAssortment">): boolean {
+  if (product.published === false) return false;
+  if (product.status === "draft") return false;
+  if (product.listingRecommendation && hiddenListing.has(product.listingRecommendation)) return false;
+  if (product.offAssortment) return false;
+  return true;
+}
+
+export function isPurchasable(product: Pick<Product, "status" | "published" | "listingRecommendation" | "offAssortment" | "available" | "price">): boolean {
+  return isPublicCatalogProduct(product) && product.available === true && product.price > 0;
+}
+
+const storefrontOptionalKeys = [
+  "description", "story", "material", "dimensions", "care", "colors", "sizeVariants", "craft",
+  "category", "featured", "status", "published", "listingRecommendation", "offAssortment",
+  "shopifyVariantId", "shoppaasBuyUrl", "image", "imageTone",
+] as const;
+
+export function toStorefrontProduct(product: Product): Product {
+  const storefront: Product = {
+    id: product.id,
+    slug: product.slug,
+    name: product.name,
+    price: product.price,
+    available: product.available,
+  };
+  const source = product as Product & Record<(typeof storefrontOptionalKeys)[number], unknown>;
+  for (const key of storefrontOptionalKeys) {
+    if (source[key] !== undefined) storefront[key] = source[key] as never;
+  }
+  return storefront;
+}
+
 export function localize(value: LocalizedText | undefined, locale: Locale): string {
   if (!value) return "";
   return value[locale]?.trim() || value["zh-CN"] || value.en || "";
@@ -26,13 +61,13 @@ export function formatPrice(price: number, locale: Locale = "zh-CN") {
   return new Intl.NumberFormat(locale, { style: "currency", currency: "CNY", maximumFractionDigits: 0 }).format(price);
 }
 
-export function snapshotSelection(items: SelectionItem[], products: Pick<Product, "id" | "slug" | "name" | "price" | "available">[], locale: Locale) {
+export function snapshotSelection(items: SelectionItem[], products: Pick<Product, "id" | "slug" | "name" | "price" | "available" | "status" | "published" | "listingRecommendation" | "offAssortment">[], locale: Locale) {
   const unavailableIds: string[] = [];
   const snapshotItems: SnapshotItem[] = [];
 
   for (const item of items) {
     const product = products.find((candidate) => candidate.id === item.productId);
-    if (!product || !product.available) {
+    if (!product || !isPurchasable(product)) {
       unavailableIds.push(item.productId);
       continue;
     }
