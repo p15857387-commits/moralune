@@ -7,7 +7,7 @@ export const previewRobots = { index: false, follow: false } as const;
 export const rootMetadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"),
   title: { default: `${brand.zh} ${brand.en}`, template: `%s · ${brand.zh}` },
-  description: "MORALUNE — objects for everyday living. Rugs, textiles, wall, objects, and light. 为日常，选一点刚刚好的美。",
+  description: "MORALUNE. Art rugs, textiles, wall hangings, objects, and lamps for quiet rooms. 块毯、织物、墙面、器物与灯。",
   robots: previewRobots,
   icons: {
     icon: [

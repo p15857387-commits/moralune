@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Menu, X } from "lucide-react";
+import { t } from "@/lib/i18n";
 import type { Locale } from "@/types";
 
 export function MobileMenu({ locale, links }: { locale: Locale; links: { href: string; label: string; kind?: "category" }[] }) {
@@ -14,7 +15,7 @@ export function MobileMenu({ locale, links }: { locale: Locale; links: { href: s
       </button>
       {open && (
         <div className="mobile-menu">
-          <p>{locale === "zh-CN" ? "为日常，选一点刚刚好的美。" : "A little beauty, chosen for everyday living."}</p>
+          <p>{t(locale).footerNote}</p>
           <nav aria-label="Mobile navigation">
             {links.map((link) => (
               <Link key={link.href + link.label} href={link.href} className={link.kind === "category" ? "mobile-category" : undefined} onClick={() => setOpen(false)}>
