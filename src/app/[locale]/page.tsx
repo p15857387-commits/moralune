@@ -49,6 +49,18 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         </div>
       </section>
 
+      <section className="scene-band scene-band-corridor" style={sceneStyle(homeScenes.story)}>
+        <div className="scene-frame">
+          <Image src={homeScenes.story.src} alt={homeScenes.story.alt[locale]} fill sizes="100vw" />
+        </div>
+      </section>
+
+      <section className="scene-band scene-band-hush" style={sceneStyle(homeScenes.atmosphere)}>
+        <div className="scene-frame">
+          <Image src={homeScenes.atmosphere.src} alt={homeScenes.atmosphere.alt[locale]} fill sizes="100vw" />
+        </div>
+      </section>
+
       <nav className="home-index" id="categories" aria-label={zh ? "系列" : "The collection"}>
         {ordered.map((category) => (
           <Link key={category.id} href={`${shopHref}?category=${category.slug}`}>

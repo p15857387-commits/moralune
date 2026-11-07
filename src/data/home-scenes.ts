@@ -11,9 +11,9 @@ import type { Locale } from "@/types";
  * phone object-position, used when the frame is taller than 3:2.
  * Do not point these slots at product SKU photos.
  *
- * The homepage places `hero` only. `story`, `material`, and
- * `atmosphere` stay available as candidates and are not required
- * by the layout.
+ * The homepage places `hero`, then `story`, then `atmosphere`,
+ * full-bleed and without extra buttons. `material` stays a
+ * candidate and is not required by the layout.
  */
 export type HomeScene = {
   id: "hero" | "story" | "atmosphere" | "material";
@@ -60,8 +60,9 @@ export const homeScenes: Record<HomeScene["id"], HomeScene> = {
     id: "atmosphere",
     src: "/images/home/vignette-sculptural-hush.jpg",
     ...approved,
-    // Warm light, bowl, and vase sit on the right. A tall crop keeps them.
-    crop: { wide: "center center", narrow: "82% center" },
+    // A short wide band crops the top and bottom. Sit lower so the
+    // bowl and vase stay in frame. A tall phone crop keeps them on the right.
+    crop: { wide: "center 70%", narrow: "82% center" },
     alt: {
       en: "A bowl and vase in warm light, with leaf shadow on the wall",
       "zh-CN": "暖光里的一只碗与一只瓶，墙上有叶影",
