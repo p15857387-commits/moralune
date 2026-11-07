@@ -389,11 +389,14 @@
 .home .button{border-radius:0;height:44px;padding-inline:18px;box-shadow:none;letter-spacing:.04em}
 .home .button:hover{transform:none;box-shadow:none}
 .home .text-link{color:var(--ink);border-bottom-color:var(--ink);letter-spacing:.02em}
-.house-departments{padding:0 0 8px}
-.house-section-head{width:100%;margin:0;padding:28px 32px 16px;display:flex;align-items:flex-end;justify-content:space-between;gap:24px}
-.house-section-head .eyebrow,.scene-story .eyebrow,.scene-close .eyebrow,.category-edit .eyebrow{margin:0 0 8px}
-.house-section-head h2{font-size:clamp(28px,2.4vw,40px);text-transform:uppercase;letter-spacing:.04em;max-width:none}
-.house-section-head>p{margin:0;max-width:32ch;color:var(--muted);font-size:14px;line-height:1.45}
+.home-index{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--moon-mist)}
+.home-index a{display:flex;flex-direction:column;gap:8px;min-height:132px;padding:28px 22px 24px;color:var(--ink);border-right:1px solid var(--line)}
+.home-index a:last-child{border-right:0}
+.home-index a:hover{background:var(--soft-clay)}
+.home-index strong{font-family:var(--sans);font-weight:700;font-size:clamp(18px,1.6vw,26px);letter-spacing:.04em;text-transform:uppercase;line-height:1}
+.home-index span{color:var(--muted);font-size:13px;line-height:1.4}
+.home-note{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:28px 32px;background:var(--moon-mist)}
+.home-note p{margin:0;max-width:36em;font-family:var(--sans);font-weight:500;font-size:clamp(18px,1.6vw,22px);letter-spacing:-.02em;line-height:1.3;color:var(--ink)}
 .category-edit{width:100%;margin:0 0 36px}
 .category-edit-figure{position:relative;aspect-ratio:16/8;margin:0;overflow:hidden;background:var(--soft-clay)}
 .category-edit-photo{object-fit:cover;animation:category-fade .28s ease}
@@ -420,8 +423,11 @@
   .scene-hero-frame,.scene-story-frame{position:relative;aspect-ratio:3/2}
   .scene-hero-copy,.scene-story-copy{width:auto;margin:0;padding:20px 16px 8px;background:var(--moon-mist)}
   .scene-hero h1{font-size:40px}
-  .house-section-head{display:block;padding:20px 16px 12px}
-  .house-section-head>p{margin-top:8px}
+  .home-index{grid-template-columns:1fr}
+  .home-index a{min-height:0;padding:18px 16px;border-right:0;border-bottom:1px solid var(--line)}
+  .home-index a:last-child{border-bottom:0}
+  .home-note{display:block;padding:22px 16px 28px}
+  .home-note .text-link{margin-top:14px}
   .category-edit{margin-bottom:28px}
   .category-edit-figure{aspect-ratio:4/5}
   .category-edit-caption{grid-template-columns:1fr;gap:12px;padding:14px 16px 4px}
