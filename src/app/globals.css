@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Noto+Sans+SC:wght@300;400;500&family=Noto+Serif+SC:wght@400;500&family=Newsreader:opsz,wght@6..72,300;6..72,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@400;500&family=Newsreader:opsz,wght@6..72,300;6..72,400&display=swap');
 
 /* Brand v0.2.1 — Moon Mist page, Soft Clay surfaces, Ink type, Blue accent only. --muted is Stone deepened so secondary text stays readable on Moon Mist. */
 :root{--moon-mist:#F4F1EC;--soft-clay:#E8DFD4;--deep-night:#1A1C1F;--blue:#003AF4;--lunar-gold:#C4A574;--stone:#9A958C;--cream:var(--soft-clay);--paper:var(--moon-mist);--ink:#2C2B29;--muted:#6E6A63;--sage:var(--stone);--sage-light:var(--soft-clay);--walnut:var(--lunar-gold);--clay:var(--lunar-gold);--line:rgba(44,43,41,.16);--serif:"Newsreader","Noto Serif SC",serif;--sans:"DM Sans","Noto Sans SC",sans-serif;--radius:3px}
@@ -367,3 +367,84 @@
 .detail-price-preview{color:var(--muted);font-family:var(--serif);font-size:18px}
 .spec-caveat{margin:0 0 8px;color:var(--muted);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
 .product-image-fallback,.photo-fallback{position:absolute;inset:0;display:grid;place-items:center;margin:0;padding:24px;text-align:center;color:var(--muted);background:var(--soft-clay);font-family:var(--serif);font-size:clamp(18px,2vw,28px);line-height:1.35}
+
+/* Homepage rhythm observed on g-star.com/en_hk: full-bleed frames stacked tight, strong sans titles, then a row of tiles. Moon Mist ground, Ink type, Blue only on the primary button. */
+.announcement{height:auto;min-height:32px;padding:8px 20px;font-size:11px;letter-spacing:.08em;line-height:1.4}
+.scene-frame{position:absolute;inset:0;overflow:hidden;background:var(--soft-clay)}
+.scene-frame img{object-fit:cover;object-position:var(--scene-crop,center)}
+.scene-hero,.scene-story{position:relative;color:var(--ink);background:var(--soft-clay);display:flex}
+.scene-hero{min-height:clamp(560px,calc(100svh - 132px),820px);align-items:flex-start}
+.scene-story{min-height:clamp(420px,58vh,640px);align-items:flex-end}
+.scene-band{position:relative;width:100%;overflow:hidden;background:var(--soft-clay)}
+.scene-band-hush{height:clamp(420px,52vh,620px)}
+.scene-band-niche{height:clamp(360px,44vh,520px)}
+.scene-slogan{position:absolute;z-index:1;margin:0;color:#2C2B29;font-family:var(--sans);font-weight:700;letter-spacing:-.03em;line-height:1.05;text-wrap:balance}
+.scene-band-hush .scene-slogan{right:30%;bottom:46%;max-width:9em;text-align:right;font-size:clamp(28px,2.8vw,44px)}
+.scene-band-niche .scene-slogan{left:32px;bottom:42%;max-width:6.4em;text-align:left;font-size:clamp(26px,2.2vw,36px)}
+.scene-hero-copy,.scene-story-copy{position:relative;z-index:1;width:min(640px,calc(100% - 64px));padding:0;background:transparent;color:var(--ink)}
+.scene-hero-copy{margin:48px 0 0 32px}
+.scene-story-copy{margin:0 32px 40px auto}
+.house-kicker{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.house-kicker img{width:16px;height:16px;object-fit:contain}
+.scene-hero h1,.scene-story h2,.scene-close h2,.house-section-head h2,.category-edit-caption h2{margin:0;font-family:var(--sans);font-weight:700;letter-spacing:-.035em;line-height:.92;color:var(--ink);text-wrap:balance}
+.scene-hero h1{font-size:clamp(44px,4.8vw,72px);max-width:11em}
+.scene-story h2,.scene-close h2{font-size:clamp(36px,3.4vw,56px);max-width:12em}
+.house-hero-lede,.scene-story-copy>p:not(.eyebrow),.category-edit-blurb,.category-edit-selected p{color:var(--ink);font-size:15px;line-height:1.45}
+.house-hero-lede{max-width:36ch;margin:14px 0 0}
+.house-hero-actions{display:flex;align-items:center;gap:22px;margin-top:20px;flex-wrap:wrap}
+.home .button{border-radius:0;height:44px;padding-inline:18px;box-shadow:none;letter-spacing:.04em}
+.home .button:hover{transform:none;box-shadow:none}
+.home .text-link{color:var(--ink);border-bottom-color:var(--ink);letter-spacing:.02em}
+.home-index{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--moon-mist)}
+.home-index a{display:flex;flex-direction:column;gap:8px;min-height:132px;padding:28px 22px 24px;color:var(--ink);border-right:1px solid var(--line)}
+.home-index a:last-child{border-right:0}
+.home-index a:hover{background:var(--soft-clay)}
+.home-index strong{font-family:var(--sans);font-weight:700;font-size:clamp(18px,1.6vw,26px);letter-spacing:.04em;text-transform:uppercase;line-height:1}
+.home-index span{color:var(--muted);font-size:13px;line-height:1.4}
+.home-note{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:28px 32px;background:var(--moon-mist)}
+.home-note p{margin:0;max-width:36em;font-family:var(--sans);font-weight:500;font-size:clamp(18px,1.6vw,22px);letter-spacing:-.02em;line-height:1.3;color:var(--ink)}
+.category-edit{width:100%;margin:0 0 36px}
+.category-edit-figure{position:relative;aspect-ratio:16/8;margin:0;overflow:hidden;background:var(--soft-clay)}
+.category-edit-photo{object-fit:cover;animation:category-fade .28s ease}
+@keyframes category-fade{from{opacity:.45}to{opacity:1}}
+.category-edit-caption{display:grid;grid-template-columns:minmax(180px,.7fr) minmax(0,1.5fr) auto;gap:24px;align-items:end;padding:16px 32px 8px;background:var(--moon-mist)}
+.category-edit-caption h2{font-size:clamp(32px,2.8vw,44px);text-transform:uppercase;letter-spacing:.03em}
+.category-edit-blurb{max-width:36ch;margin:8px 0 0;color:var(--muted)}
+.category-edit-selected h3{margin:0 0 6px;font-family:var(--sans);font-weight:500;font-size:18px;letter-spacing:-.02em;color:var(--ink)}
+.category-edit-selected p{max-width:62ch;margin:0 0 6px;color:var(--muted)}
+.category-edit-sale{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--stone)}
+.category-edit-choices{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;padding:8px 32px 0}
+.category-edit-choices button{display:flex;flex-direction:column;align-items:stretch;gap:6px;min-height:44px;padding:0;border:2px solid transparent;background:transparent;text-align:left;cursor:pointer;color:var(--ink)}
+.category-edit-choices button[aria-selected="true"]{border-color:var(--ink)}
+.category-edit-choices button:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.category-edit-thumb{position:relative;display:block;aspect-ratio:3/4;height:auto;overflow:hidden;background:var(--soft-clay)}
+.category-edit-choices button>span:last-child{font-size:12px;line-height:1.3;padding:0 4px 8px}
+.category-edit-all{margin:14px 32px 0}
+.scene-story-copy>p:not(.eyebrow){max-width:36ch;margin:12px 0 16px}
+.scene-close{padding:48px 32px 64px;background:var(--moon-mist);border-top:1px solid var(--line)}
+.scene-close h2{margin:0 0 20px}
+@media(max-width:860px){
+  .scene-frame img{object-position:var(--scene-crop-narrow,72% center)}
+  .scene-hero,.scene-story{min-height:0;display:block}
+  .scene-hero-frame,.scene-story-frame,.scene-band .scene-frame{position:relative;aspect-ratio:3/2}
+  .scene-band,.scene-band-niche,.scene-band-hush{height:auto}
+  .scene-band-hush .scene-slogan{right:16px;bottom:34%;max-width:min(11em,calc(100% - 32px));font-size:26px}
+  .scene-band-niche .scene-slogan{left:16px;bottom:42%;max-width:min(7em,calc(100% - 32px));font-size:26px}
+  .scene-hero-copy,.scene-story-copy{width:auto;margin:0;padding:20px 16px 8px;background:var(--moon-mist)}
+  .scene-hero h1{font-size:40px}
+  .home-index{grid-template-columns:1fr}
+  .home-index a{min-height:0;padding:18px 16px;border-right:0;border-bottom:1px solid var(--line)}
+  .home-index a:last-child{border-bottom:0}
+  .home-note{display:block;padding:22px 16px 28px}
+  .home-note .text-link{margin-top:14px}
+  .category-edit{margin-bottom:28px}
+  .category-edit-figure{aspect-ratio:4/5}
+  .category-edit-caption{grid-template-columns:1fr;gap:12px;padding:14px 16px 4px}
+  .category-edit-choices{display:flex;overflow-x:auto;gap:8px;padding:8px 16px 0;scroll-snap-type:x mandatory}
+  .category-edit-choices button{flex:0 0 42%;scroll-snap-align:start}
+  .category-edit-all{margin-left:16px}
+  .scene-close{padding:32px 16px 48px}
+}
+@media(prefers-reduced-motion:reduce){
+  .category-edit-photo{animation:none}
+}
