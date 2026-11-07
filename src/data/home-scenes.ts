@@ -12,7 +12,8 @@ import type { Locale } from "@/types";
  * Do not point these slots at product SKU photos.
  *
  * The homepage places `hero`, then `atmosphere` (taller), then
- * `niche` (shorter). `story` (the earlier corridor) and `material`
+ * `niche` (shorter; currently the oak and linen room).
+ * `story` (corridor), the curved-plaster file, and `material`
  * stay on disk and are not rendered.
  */
 export type HomeScene = {
@@ -57,17 +58,17 @@ export const homeScenes: Record<HomeScene["id"], HomeScene> = {
   },
   niche: {
     id: "niche",
-    src: "/images/home/option-3-curved-plaster-niche.jpg",
+    src: "/images/home/option-1-oak-linen-rest.jpg",
     status: "approved",
     width: 1536,
     height: 1024,
-    // A short wide band has to keep both the niche and the arch.
-    // Sit slightly above center so the arch crown stays in frame.
+    // A short wide band sits above the floor so the daybed, vase,
+    // and window stay in frame and the blurred foreground drops out.
     // Phone is the native 3:2, so the whole room shows.
-    crop: { wide: "center 40%", narrow: "center center" },
+    crop: { wide: "center 38%", narrow: "center center" },
     alt: {
-      en: "A curved plaster niche and an arch in warm light",
-      "zh-CN": "暖光里的弧形壁龛与拱门",
+      en: "A linen daybed and oak bench in warm evening light",
+      "zh-CN": "暖色黄昏里的亚麻卧榻与橡木",
     },
   },
   atmosphere: {
