@@ -3,7 +3,7 @@ import type { Locale } from "@/types";
 
 /**
  * Homepage atmosphere frames from 品牌与视觉.
- * All files are 2400×1600 (3:2).
+ * Most files are 2400×1600 (3:2). The curved niche is 1536×1024, also 3:2.
  *
  * To replace a frame, overwrite the file in `public/images/home/`
  * (keep the filename) or point `src` at the new public path.
@@ -12,15 +12,15 @@ import type { Locale } from "@/types";
  * Do not point these slots at product SKU photos.
  *
  * The homepage places `hero`, then `atmosphere` (taller), then
- * `story` (shorter), full-bleed and without extra buttons.
- * `material` stays a candidate and is not required by the layout.
+ * `niche` (shorter). `story` (the earlier corridor) and `material`
+ * stay on disk and are not rendered.
  */
 export type HomeScene = {
-  id: "hero" | "story" | "atmosphere" | "material";
+  id: "hero" | "story" | "atmosphere" | "material" | "niche";
   src: string;
   status: "approved";
-  width: 2400;
-  height: 1600;
+  width: number;
+  height: number;
   crop: { wide: string; narrow: string };
   alt: Record<Locale, string>;
 };
@@ -48,12 +48,26 @@ export const homeScenes: Record<HomeScene["id"], HomeScene> = {
     id: "story",
     src: "/images/home/hero-corridor-light.jpg",
     ...approved,
-    // The lit corridor sits on the left. A tall crop stays with that light
-    // rather than the empty right wall.
+    // Unused on the homepage. Kept so the file can be swapped back in.
     crop: { wide: "center center", narrow: "22% center" },
     alt: {
       en: "Daylight along a pale corridor",
       "zh-CN": "日光沿着一条浅色走廊",
+    },
+  },
+  niche: {
+    id: "niche",
+    src: "/images/home/option-3-curved-plaster-niche.jpg",
+    status: "approved",
+    width: 1536,
+    height: 1024,
+    // A short wide band has to keep both the niche and the arch.
+    // Sit slightly above center so the arch crown stays in frame.
+    // Phone is the native 3:2, so the whole room shows.
+    crop: { wide: "center 40%", narrow: "center center" },
+    alt: {
+      en: "A curved plaster niche and an arch in warm light",
+      "zh-CN": "暖光里的弧形壁龛与拱门",
     },
   },
   atmosphere: {

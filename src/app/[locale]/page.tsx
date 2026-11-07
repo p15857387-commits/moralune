@@ -56,9 +56,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         <p className="scene-slogan" lang="en">A quieter kind of presence.</p>
       </section>
 
-      <section className="scene-band scene-band-corridor" style={sceneStyle(homeScenes.story)}>
+      <section className="scene-band scene-band-niche" style={sceneStyle(homeScenes.niche)}>
         <div className="scene-frame">
-          <Image src={homeScenes.story.src} alt={homeScenes.story.alt[locale]} fill sizes="100vw" />
+          <Image src={homeScenes.niche.src} alt={homeScenes.niche.alt[locale]} fill sizes="100vw" />
         </div>
         <p className="scene-slogan" lang="en">Room to slow down.</p>
       </section>
