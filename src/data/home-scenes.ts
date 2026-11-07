@@ -10,6 +10,10 @@ import type { Locale } from "@/types";
  * `crop.wide` is the desktop object-position. `crop.narrow` is the
  * phone object-position, used when the frame is taller than 3:2.
  * Do not point these slots at product SKU photos.
+ *
+ * The homepage places `hero` and `story` only. `material` and
+ * `atmosphere` stay available as candidates and are not required
+ * by the layout.
  */
 export type HomeScene = {
   id: "hero" | "story" | "atmosphere" | "material";

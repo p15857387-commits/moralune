@@ -101,11 +101,20 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         </div>
       </section>
 
-      <section className="scene-material" aria-label={zh ? "材质" : "Material"} style={sceneStyle(homeScenes.material)}>
-        <div className="scene-frame scene-material-frame">
-          <Image src={homeScenes.material.src} alt="" fill sizes="100vw" />
+      <section className="scene-story" id="story" style={sceneStyle(homeScenes.story)}>
+        <div className="scene-frame scene-story-frame">
+          <Image src={homeScenes.story.src} alt={homeScenes.story.alt[locale]} fill sizes="100vw" />
         </div>
-        <p>{zh ? "羊毛、亚麻、陶土、木，以及收着的光。" : "Wool, linen, clay, wood, and a measured light."}</p>
+        <div className="scene-story-copy">
+          <p className="eyebrow">{zh ? "材质" : "Material"}</p>
+          <h2>{zh ? "留得下的，是手碰得到的。" : "What stays is what you can touch."}</h2>
+          <p>
+            {zh
+              ? "看得到织纹的羊毛，垂下来的亚麻，边角柔和的陶，浅色的木。放回那间房间仍然合适，才会留在这里。"
+              : "Wool you can see. Linen that falls. Clay with a soft edge. Pale wood, left mostly as it is."}
+          </p>
+          <Link className="text-link" href={`/${locale}/about`}>{zh ? "我们如何挑选" : "How we choose"}<ArrowRight size={15} /></Link>
+        </div>
       </section>
 
       <section className="house-departments" id="categories" aria-label={zh ? "系列" : "The collection"}>
@@ -114,7 +123,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             <p className="eyebrow">{zh ? "系列" : "The collection"}</p>
             <h2>{zh ? "房间从这里安静下来。" : "Where a room begins."}</h2>
           </div>
-          <p>{zh ? "五个位置。点一件，画面跟着换。" : "Five places. Choose a piece, and the picture follows."}</p>
+          <p>{zh ? "点一件，这一组的大图就换。" : "Choose a piece. The picture above it changes."}</p>
         </div>
         {edits.map((edit) => (
           <CategorySelect
@@ -132,32 +141,10 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         ))}
       </section>
 
-      <section className="scene-story" id="story" style={sceneStyle(homeScenes.story)}>
-        <div className="scene-frame scene-story-frame">
-          <Image src={homeScenes.story.src} alt={homeScenes.story.alt[locale]} fill sizes="100vw" />
-        </div>
-        <div className="scene-story-copy">
-          <p className="eyebrow">{zh ? "材质" : "Material"}</p>
-          <h2>{zh ? "留得下的，是手碰得到的。" : "What stays is what you can touch."}</h2>
-          <p>
-            {zh
-              ? "看得到织纹的羊毛，垂下来的亚麻，边角柔和的陶，浅色的木，尽量保持原样。放回那间房间仍然合适，才会留在这里。"
-              : "Wool you can see. Linen that falls. Clay with a soft edge. Pale wood, left mostly as it is. A piece remains when it still belongs in the room it was chosen for."}
-          </p>
-          <Link className="text-link" href={`/${locale}/about`}>{zh ? "我们如何挑选" : "How we choose"}<ArrowRight size={16} /></Link>
-        </div>
-      </section>
-
-      <section className="scene-close" style={sceneStyle(homeScenes.atmosphere)}>
-        <div className="scene-frame scene-close-frame">
-          <Image src={homeScenes.atmosphere.src} alt={homeScenes.atmosphere.alt[locale]} fill sizes="100vw" />
-        </div>
-        <div className="scene-close-copy">
-          <Image className="house-close-mark" src={marks.moon} alt="" width={28} height={28} />
-          <p className="eyebrow">MORALUNE</p>
-          <h2>{zh ? "从一块地毯开始，或从一盏灯。" : "Begin with the floor, or with the light."}</h2>
-          <Link className="button dark" href={shopHref}>{zh ? "进入系列" : "Explore the collection"}<ArrowRight size={16} /></Link>
-        </div>
+      <section className="scene-close">
+        <p className="eyebrow">MORALUNE</p>
+        <h2>{zh ? "从一块地毯开始，或从一盏灯。" : "Begin with the floor, or with the light."}</h2>
+        <Link className="button dark" href={shopHref}>{zh ? "进入系列" : "Explore the collection"}<ArrowRight size={16} /></Link>
       </section>
     </div>
   );

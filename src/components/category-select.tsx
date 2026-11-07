@@ -56,44 +56,44 @@ export function CategorySelect({ locale, slug, indexLabel, title, blurb, choices
 
   return (
     <section className="category-edit" id={slug} aria-labelledby={`${slug}-title`}>
-      <div className="category-edit-stage">
-        <figure className="category-edit-figure">
-          <Image key={selected.id} className="category-edit-photo" src={selected.image} alt={selected.name} fill sizes="(max-width: 860px) 100vw, 58vw" />
-        </figure>
-        <div className="category-edit-panel">
+      <figure className="category-edit-figure">
+        <Image key={selected.id} className="category-edit-photo" src={selected.image} alt={selected.name} fill sizes="100vw" />
+      </figure>
+      <div className="category-edit-caption">
+        <div>
           <p className="eyebrow">{indexLabel}</p>
           <h2 id={`${slug}-title`}>{title}</h2>
           <p className="category-edit-blurb">{blurb}</p>
-          <div className="category-edit-selected" aria-live="polite">
-            <h3>{selected.name}</h3>
-            {selected.detail ? <p>{selected.detail}</p> : null}
-            <p className="category-edit-sale">{selected.saleLabel}</p>
-            <Link className="text-link" href={`/${locale}/products/${selected.slug}`}>{viewLabel}<ArrowRight size={15} /></Link>
-          </div>
-          <div className="category-edit-choices" role="listbox" aria-label={listLabel}>
-            {choices.map((choice, choiceIndex) => (
-              <button
-                key={choice.id}
-                id={`${slug}-opt-${choice.id}`}
-                ref={(node) => { buttons.current[choiceIndex] = node; }}
-                type="button"
-                role="option"
-                aria-selected={choiceIndex === index}
-                tabIndex={choiceIndex === index ? 0 : -1}
-                data-sku={choice.id}
-                onClick={() => setIndex(choiceIndex)}
-                onKeyDown={(event) => onKeyDown(event, choiceIndex)}
-              >
-                <span className="category-edit-thumb">
-                  <Image src={choice.image} alt="" fill sizes="88px" />
-                </span>
-                <span>{choice.name}</span>
-              </button>
-            ))}
-          </div>
-          <Link className="text-link" href={`/${locale}/shop?category=${slug}`}>{allLabel}<ArrowRight size={15} /></Link>
         </div>
+        <div className="category-edit-selected" aria-live="polite">
+          <h3>{selected.name}</h3>
+          {selected.detail ? <p>{selected.detail}</p> : null}
+          <p className="category-edit-sale">{selected.saleLabel}</p>
+        </div>
+        <Link className="text-link" href={`/${locale}/products/${selected.slug}`}>{viewLabel}<ArrowRight size={15} /></Link>
       </div>
+      <div className="category-edit-choices" role="listbox" aria-label={listLabel}>
+        {choices.map((choice, choiceIndex) => (
+          <button
+            key={choice.id}
+            id={`${slug}-opt-${choice.id}`}
+            ref={(node) => { buttons.current[choiceIndex] = node; }}
+            type="button"
+            role="option"
+            aria-selected={choiceIndex === index}
+            tabIndex={choiceIndex === index ? 0 : -1}
+            data-sku={choice.id}
+            onClick={() => setIndex(choiceIndex)}
+            onKeyDown={(event) => onKeyDown(event, choiceIndex)}
+          >
+            <span className="category-edit-thumb">
+              <Image src={choice.image} alt="" fill sizes="16vw" />
+            </span>
+            <span>{choice.name}</span>
+          </button>
+        ))}
+      </div>
+      <Link className="category-edit-all text-link" href={`/${locale}/shop?category=${slug}`}>{allLabel}<ArrowRight size={15} /></Link>
     </section>
   );
 }
