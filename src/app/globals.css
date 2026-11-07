@@ -376,8 +376,8 @@
 .scene-hero{min-height:clamp(560px,calc(100svh - 132px),820px);align-items:flex-start}
 .scene-story{min-height:clamp(420px,58vh,640px);align-items:flex-end}
 .scene-band{position:relative;width:100%;overflow:hidden;background:var(--soft-clay)}
-.scene-band-corridor{height:clamp(420px,52vh,620px)}
-.scene-band-hush{height:clamp(360px,44vh,520px)}
+.scene-band-hush{height:clamp(420px,52vh,620px)}
+.scene-band-corridor{height:clamp(360px,44vh,520px)}
 .scene-hero-copy,.scene-story-copy{position:relative;z-index:1;width:min(640px,calc(100% - 64px));padding:0;background:transparent;color:var(--ink)}
 .scene-hero-copy{margin:48px 0 0 32px}
 .scene-story-copy{margin:0 32px 40px auto}
