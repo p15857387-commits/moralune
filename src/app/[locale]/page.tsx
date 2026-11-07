@@ -53,12 +53,14 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         <div className="scene-frame">
           <Image src={homeScenes.atmosphere.src} alt={homeScenes.atmosphere.alt[locale]} fill sizes="100vw" />
         </div>
+        <p className="scene-slogan" lang="en">A quieter kind of presence.</p>
       </section>
 
       <section className="scene-band scene-band-corridor" style={sceneStyle(homeScenes.story)}>
         <div className="scene-frame">
           <Image src={homeScenes.story.src} alt={homeScenes.story.alt[locale]} fill sizes="100vw" />
         </div>
+        <p className="scene-slogan" lang="en">Room to slow down.</p>
       </section>
 
       <nav className="home-index" id="categories" aria-label={zh ? "系列" : "The collection"}>
