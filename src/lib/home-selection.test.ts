@@ -7,14 +7,22 @@ const products = listPreviewFallbackProducts();
 
 describe("homepage category edit", () => {
   it("shows six image-led pieces from each photo folder and leaves the rest unpadded", () => {
-    expect(imageLedHomeEdit(products, "rugs")).toMatchObject({ eligible: 8, shown: 6, shortfall: 0 });
-    expect(imageLedHomeEdit(products, "cushions")).toMatchObject({ eligible: 8, shown: 6, shortfall: 0 });
-    expect(imageLedHomeEdit(products, "wall-hangings")).toMatchObject({ eligible: 8, shown: 6, shortfall: 0 });
-    expect(imageLedHomeEdit(products, "objects")).toMatchObject({ eligible: 11, shown: 6, shortfall: 0 });
-    expect(imageLedHomeEdit(products, "lamps")).toMatchObject({ eligible: 8, shown: 6, shortfall: 0 });
-    for (const slug of ["rugs", "cushions", "wall-hangings", "objects", "lamps"]) {
-      for (const item of imageLedHomeEdit(products, slug).items) {
-        expect(item.id.startsWith("img-")).toBe(true);
+    expect(imageLedHomeEdit(products, "rugs")).toMatchObject({ eligible: 9, shown: 6, shortfall: 0 });
+    expect(imageLedHomeEdit(products, "cushions")).toMatchObject({ eligible: 9, shown: 6, shortfall: 0 });
+    expect(imageLedHomeEdit(products, "wall-hangings")).toMatchObject({ eligible: 9, shown: 6, shortfall: 0 });
+    expect(imageLedHomeEdit(products, "objects")).toMatchObject({ eligible: 12, shown: 6, shortfall: 0 });
+    expect(imageLedHomeEdit(products, "lamps")).toMatchObject({ eligible: 9, shown: 6, shortfall: 0 });
+    const leads: Record<string, string> = {
+      rugs: "rug-organic-01",
+      cushions: "cushion-sphere-01",
+      "wall-hangings": "wall-clock-01",
+      objects: "object-footed-bowl-01",
+      lamps: "lamp-stitched-01",
+    };
+    for (const slug of Object.keys(leads)) {
+      const items = imageLedHomeEdit(products, slug).items;
+      expect(items[0]?.id).toBe(leads[slug]);
+      for (const item of items) {
         expect(item.image).toContain(`/products/v2/${slug}/`);
       }
     }

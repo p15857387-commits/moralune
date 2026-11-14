@@ -156,14 +156,14 @@ describe("product master v1", () => {
 
   it("lists the folder-grouped photo assortment on the shop and keeps it unpriced", async () => {
     const catalog = await getCatalog();
-    expect(catalog.products).toHaveLength(43);
+    expect(catalog.products).toHaveLength(48);
     expect(catalog.products.every((product) => product.status === "draft" && product.price === 0 && !isPurchasable(product) && isPreviewListedProduct(product) && !isPublicCatalogProduct(product))).toBe(true);
     expect(catalog.products.some((product) => product.id === "indigo-tide-rug" || product.id.startsWith("WAL-LOOM") || product.id.startsWith("RUG-"))).toBe(false);
-    expect(productsForShop(catalog.products, "rugs")).toHaveLength(8);
-    expect(productsForShop(catalog.products, "cushions")).toHaveLength(8);
-    expect(productsForShop(catalog.products, "wall-hangings")).toHaveLength(8);
-    expect(productsForShop(catalog.products, "objects")).toHaveLength(11);
-    expect(productsForShop(catalog.products, "lamps")).toHaveLength(8);
+    expect(productsForShop(catalog.products, "rugs")).toHaveLength(9);
+    expect(productsForShop(catalog.products, "cushions")).toHaveLength(9);
+    expect(productsForShop(catalog.products, "wall-hangings")).toHaveLength(9);
+    expect(productsForShop(catalog.products, "objects")).toHaveLength(12);
+    expect(productsForShop(catalog.products, "lamps")).toHaveLength(9);
     expect(productsForShop(catalog.products, "lamps").filter((product) => product.id === "img-3581" || product.id === "img-3582")).toHaveLength(2);
     expect(productsForShop(catalog.products, "objects").some((product) => product.id === "img-3581" || product.id === "img-3582")).toBe(false);
     expect(JSON.stringify(catalog)).not.toContain("made-in-china.com");
