@@ -6,32 +6,30 @@ import { PreviewNotice } from "@/components/preview-notice";
 import { ProductGallery } from "@/components/product-gallery";
 import { ProductPurchase } from "@/components/product-purchase";
 import { ProductGrid } from "@/components/product-grid";
-import { products as fallbackProducts } from "@/data/catalog";
-import { productMasterDrafts } from "@/data/product-master-v1";
-import { getCatalogProduct } from "@/lib/catalog-source";
+import { getCatalogProduct, listPreviewFallbackProducts } from "@/lib/catalog-source";
 import { displayName, formatListedPrice, isPreviewDraft, isPreviewListedProduct, localize } from "@/lib/catalog";
 import { isLocale, locales, t } from "@/lib/i18n";
 import { env, hasShoppaas } from "@/lib/env";
+import { canonicalProductSlug } from "@/lib/legacy-routes";
 import { previewRobots } from "@/lib/site-metadata";
 
 type Props = { params: Promise<{ locale: string; slug: string }> };
 
 export function generateStaticParams() {
-  const products = [...fallbackProducts, ...productMasterDrafts].filter(isPreviewListedProduct);
-  return locales.flatMap((locale) => products.map((product) => ({ locale, slug: product.slug })));
+  return locales.flatMap((locale) => listPreviewFallbackProducts().map((product) => ({ locale, slug: product.slug })));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
   if (!isLocale(locale)) return {};
-  const { product } = await getCatalogProduct(slug);
+  const { product } = await getCatalogProduct(canonicalProductSlug(slug) ?? slug);
   return product ? { title: displayName(product.name, locale), description: localize(product.description, locale), robots: previewRobots } : { robots: previewRobots };
 }
 
 export default async function ProductPage({ params }: Props) {
   const { locale, slug } = await params;
   if (!isLocale(locale)) notFound();
-  const catalog = await getCatalogProduct(slug);
+  const catalog = await getCatalogProduct(canonicalProductSlug(slug) ?? slug);
   const product = catalog.product;
   if (!product || !isPreviewListedProduct(product)) notFound();
   const copy = t(locale);
@@ -52,7 +50,7 @@ export default async function ProductPage({ params }: Props) {
 
   return (
     <div className="product-page page-shell">
-      <Link className="back-link" href={`/${locale}/shop`}><ArrowLeft size={16} />{zh ? "返回选物" : "Back to shop"}</Link>
+      <Link className="back-link" href={`/${locale}/shop`}><ArrowLeft size={16} />{zh ? "返回商店" : "Back to shop"}</Link>
       <PreviewNotice locale={locale} />
       <div className="product-detail">
         <ProductGallery frames={frames} alt={displayName(product.name, locale)} badge={{ label: badgeLabel, available: product.available, preview }} emptyLabel={zh ? "供应商图片与这件单品不符。" : "No matching supplier photo for this piece."} />

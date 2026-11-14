@@ -52,7 +52,7 @@ export function localize(value: LocalizedText | undefined, locale: Locale): stri
   return value[locale]?.trim() || value["zh-CN"] || value.en || "";
 }
 
-const categoryOrder = ["art-rugs", "cushions-throws", "wall-art", "artful-storage", "decorative-lighting"];
+const categoryOrder = ["rugs", "cushions", "wall-hangings", "objects", "lamps"];
 
 export function sortCategories<T extends { slug: string }>(categories: T[]): T[] {
   return [...categories].sort((a, b) => {

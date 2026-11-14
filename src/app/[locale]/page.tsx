@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { notFound } from "next/navigation";
+import { HomeSceneDeck } from "@/components/home-scene-deck";
 import { homeScenes, sceneStyle } from "@/data/home-scenes";
 import { getCatalog } from "@/lib/catalog-source";
 import { localize, sortCategories } from "@/lib/catalog";
@@ -10,11 +11,11 @@ import { marks } from "@/lib/brand";
 import type { Locale } from "@/types";
 
 const categoryNotes: Record<string, Record<Locale, string>> = {
-  "art-rugs": { en: "Wool underfoot", "zh-CN": "羊毛在脚下" },
-  "cushions-throws": { en: "For the seat and the bed", "zh-CN": "坐与卧" },
-  "wall-art": { en: "For a quiet wall", "zh-CN": "给墙面" },
-  "artful-storage": { en: "For the table and shelf", "zh-CN": "桌面与层架" },
-  "decorative-lighting": { en: "For the evening", "zh-CN": "给夜晚" },
+  rugs: { en: "Wool underfoot", "zh-CN": "羊毛在脚下" },
+  cushions: { en: "For the seat and the bed", "zh-CN": "坐与卧" },
+  "wall-hangings": { en: "For a quiet wall", "zh-CN": "给墙面" },
+  objects: { en: "For the table and shelf", "zh-CN": "桌面与层架" },
+  lamps: { en: "For the evening", "zh-CN": "给夜晚" },
 };
 
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
@@ -27,7 +28,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
   return (
     <div className={zh ? "home home-zh" : "home home-en"}>
-      <section className="scene-hero" id="top" aria-label={zh ? "首页" : "Home"} style={sceneStyle(homeScenes.hero)}>
+    <HomeSceneDeck>
+      <section className="scene-hero" id="top" data-scene aria-label={zh ? "首页" : "Home"} style={sceneStyle(homeScenes.hero)}>
         <div className="scene-frame scene-hero-frame">
           <Image src={homeScenes.hero.src} alt={homeScenes.hero.alt[locale]} fill priority sizes="100vw" />
         </div>
@@ -39,8 +41,8 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
           <h1>{zh ? <>安静的光<br />放进已有的房间。</> : <>Quiet light<br />for the rooms you keep.</>}</h1>
           <p className="house-hero-lede">
             {zh
-              ? "块毯、抱枕与披肩、墙面、器物与灯。"
-              : "Art rugs, cushions and throws, wall, objects, and lamps."}
+              ? "块毯、抱枕、墙面挂饰、小摆件与灯。"
+              : "Rugs, cushions, wall hangings, objects, and lamps."}
           </p>
           <div className="house-hero-actions">
             <Link className="button dark" href={shopHref}>{zh ? "进入系列" : "Explore the collection"}<ArrowRight size={16} /></Link>
@@ -49,19 +51,20 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         </div>
       </section>
 
-      <section className="scene-band scene-band-hush" style={sceneStyle(homeScenes.atmosphere)}>
+      <section className="scene-band scene-band-hush" data-scene style={sceneStyle(homeScenes.atmosphere)}>
         <div className="scene-frame">
           <Image src={homeScenes.atmosphere.src} alt={homeScenes.atmosphere.alt[locale]} fill sizes="100vw" />
         </div>
-        <p className="scene-slogan" lang="en">A quieter kind of presence.</p>
+        <p className="scene-slogan">{zh ? "一种更安静的在场。" : "A quieter kind of presence."}</p>
       </section>
 
-      <section className="scene-band scene-band-niche" style={sceneStyle(homeScenes.niche)}>
+      <section className="scene-band scene-band-niche" data-scene style={sceneStyle(homeScenes.niche)}>
         <div className="scene-frame">
           <Image src={homeScenes.niche.src} alt={homeScenes.niche.alt[locale]} fill sizes="100vw" />
         </div>
-        <p className="scene-slogan" lang="en">Room to slow down.</p>
+        <p className="scene-slogan">{zh ? "给慢下来留出空间。" : "Room to slow down."}</p>
       </section>
+    </HomeSceneDeck>
 
       <nav className="home-index" id="categories" aria-label={zh ? "系列" : "The collection"}>
         {ordered.map((category) => (

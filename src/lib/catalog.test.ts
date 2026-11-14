@@ -27,13 +27,13 @@ describe("catalog", () => {
 
   it("orders the five shop categories and names objects without the old storage label", () => {
     expect(sortCategories(categories).map((category) => category.slug)).toEqual([
-      "art-rugs",
-      "cushions-throws",
-      "wall-art",
-      "artful-storage",
-      "decorative-lighting",
+      "rugs",
+      "cushions",
+      "wall-hangings",
+      "objects",
+      "lamps",
     ]);
-    expect(categories.find((category) => category.slug === "artful-storage")?.name).toEqual({ "zh-CN": "器物", en: "Objects" });
+    expect(categories.find((category) => category.slug === "objects")?.name).toEqual({ "zh-CN": "小摆件", en: "Objects" });
     expect(JSON.stringify(categories)).not.toContain("收纳艺术");
   });
 

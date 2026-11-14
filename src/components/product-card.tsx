@@ -15,7 +15,7 @@ export function ProductCard({ product, locale, index = 0 }: { product: Product; 
   return (
     <article className="product-card" style={{ "--delay": `${index * 70}ms` } as React.CSSProperties}>
       <Link className="product-image-wrap" href={`/${locale}/products/${product.slug}`}>
-        {product.image ? <Image src={product.image} alt={name} fill sizes="(max-width: 700px) 50vw, 25vw" className="product-image" /> : <span className="product-image-fallback">{locale === "zh-CN" ? "暂无匹配图片" : "No matching photo"}</span>}
+        {product.image ? <Image src={product.image} alt={name} fill sizes="(max-width: 700px) 50vw, 25vw" className="product-image" unoptimized={product.image.startsWith("/products/v2/")} /> : <span className="product-image-fallback">{locale === "zh-CN" ? "暂无匹配图片" : "No matching photo"}</span>}
         <span className={pillClass}>{product.available ? availableLabel : preview ? previewLabel : unavailableLabel}</span>
         <span className="card-arrow"><ArrowUpRight size={17} /></span>
       </Link>
