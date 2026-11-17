@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@400;500&family=Newsreader:opsz,wght@6..72,300;6..72,400&display=swap');
+@import "./fonts.css";
 
 /* Brand v0.2.1 — Moon Mist page, Soft Clay surfaces, Ink type, Blue accent only. --muted is Stone deepened so secondary text stays readable on Moon Mist. */
 :root{--moon-mist:#F4F1EC;--soft-clay:#E8DFD4;--deep-night:#1A1C1F;--blue:#003AF4;--lunar-gold:#C4A574;--stone:#9A958C;--cream:var(--soft-clay);--paper:var(--moon-mist);--ink:#2C2B29;--muted:#6E6A63;--sage:var(--stone);--sage-light:var(--soft-clay);--walnut:var(--lunar-gold);--clay:var(--lunar-gold);--line:rgba(44,43,41,.16);--serif:"Newsreader","Noto Serif SC",serif;--sans:"DM Sans","Noto Sans SC",sans-serif;--radius:3px}

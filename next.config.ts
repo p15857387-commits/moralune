@@ -4,8 +4,7 @@ const nextConfig: NextConfig = {
   allowedDevOrigins: ["127.0.0.1"],
   images: {
     remotePatterns: [
-      { protocol: "https", hostname: "images.unsplash.com" },
-      // Sanity serves uploaded product assets from this CDN in production.
+      // Sanity serves uploaded product assets from this CDN only when a project id is configured.
       { protocol: "https", hostname: "cdn.sanity.io" },
     ],
   },

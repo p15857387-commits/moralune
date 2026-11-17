@@ -59,7 +59,7 @@ When a positive integer cent amount is later entered for an exact slug, the shop
 
 Image files are served from `public/` at their stored pixel size. Product cards mark `/products/v2/` images `unoptimized`, so Next.js does not resize them.
 
-## Logos and fonts
+## Logos, fonts, and the About photograph
 
 Wordmarks and icons used by the storefront are local files in `public/`:
 
@@ -71,9 +71,11 @@ Wordmarks and icons used by the storefront are local files in `public/`:
 
 Matching source artwork also lives in `brand/assets/`. No storefront path uses a VM absolute path.
 
-`src/app/globals.css` loads DM Sans, Noto Sans SC, Noto Serif SC, and Newsreader from Google Fonts. Those font files are not in the repo.
+Type is self-hosted. `src/app/globals.css` imports `src/app/fonts.css`, which points at woff2 files in `public/fonts/`. Families and weights match the previous Google Fonts request: DM Sans 300/400/500/700, Newsreader 300/400, Noto Sans SC 300/400/500/700, Noto Serif SC 400/500. The Chinese families include every unicode-range file from those Fontsource packages for those weights, so Simplified Chinese coverage is not reduced to the characters already on the page. Licenses and package versions are in `public/fonts/NOTICE.md` and `public/fonts/licenses/`. Those licenses do not cover the product photographs.
 
-The About page hero (`src/app/[locale]/about/page.tsx`) still requests one photograph from `images.unsplash.com`. It is not part of the 48-product assortment. `next.config.ts` also allows `cdn.sanity.io` for an optional Sanity catalog. With Sanity unset, product photos stay on the local v2 files.
+The About hero is `/images/about/quiet-home-interior.jpg` (1800×1013), the same crop previously loaded from Unsplash photo `photo-1616486338812-3dadae4b4ace`. Credit and the Unsplash License are in `public/images/about/NOTICE.md`. It is not a shop product photo.
+
+`next.config.ts` still allows `cdn.sanity.io` for an optional Sanity catalog. With Sanity unset, the pages do not request it. No Google Fonts or Unsplash URL remains in the storefront source.
 
 ## Environment variable names
 
@@ -97,7 +99,7 @@ Optional and currently missing on a fresh checkout: Sanity project id and token,
 
 ## Later website ZIP
 
-Include tracked source, `public/` pictures and logos, `brand/`, `package.json`, `package-lock.json`, config, `README.md`, this file, and `.env.example`.
+Include tracked source, `public/` pictures, fonts, licenses, and logos, `brand/`, `package.json`, `package-lock.json`, config, `README.md`, this file, and `.env.example`.
 
 Exclude `node_modules`, `.next`, `.git`, real `.env` files, credentials, cookies, sessions, and private business research. Do not package a price CSV until it has been accepted into `src/data/usd-test-prices.ts`.
 
