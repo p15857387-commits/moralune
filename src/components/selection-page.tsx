@@ -6,7 +6,8 @@ import Link from "next/link";
 import { ArrowLeft, LoaderCircle, Minus, Plus, Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { products } from "@/data/catalog";
-import { displayName, formatPrice } from "@/lib/catalog";
+import { displayName, formatListedPrice } from "@/lib/catalog";
+import { formatUsdTestPriceQuantity, resolveUsdTestPriceCents } from "@/lib/usd-test-price";
 import { useSelectionStore } from "@/store/selection";
 import type { Locale } from "@/types";
 
@@ -21,7 +22,16 @@ export function SelectionPage({ locale, paypalEnabled, paypalPriceIds }: { local
     () => items.map((item) => ({ ...item, product: products.find((p) => p.id === item.productId) })).filter((item) => item.product),
     [items],
   );
-  const total = selected.reduce((sum, item) => sum + item.product!.price * item.quantity, 0);
+  const notForSale = zh ? "暂不出售" : "Not for sale";
+  const totalLabel = (() => {
+    const cents: number[] = [];
+    for (const item of selected) {
+      const value = resolveUsdTestPriceCents(item.product!);
+      if (!value) return notForSale;
+      cents.push(value * item.quantity);
+    }
+    return formatUsdTestPriceQuantity(cents.reduce((sum, value) => sum + value, 0), 1) ?? notForSale;
+  })();
   const hasUnavailable = selected.some((item) => !item.product!.available);
   const hasUsdPrices = selected.every((item) => paypalPriceIds.includes(item.product!.id));
 
@@ -90,7 +100,7 @@ export function SelectionPage({ locale, paypalEnabled, paypalPriceIds }: { local
               <div className="selection-item-copy">
                 <div>
                   <h2>{displayName(product!.name, locale)}</h2>
-                  <p>{formatPrice(product!.price, locale)}</p>
+                  <p>{formatListedPrice(product!, locale) ?? notForSale}</p>
                   {!product!.available && <strong>{zh ? "暂时缺货，请移除后再提交。" : "Currently unavailable. Remove before submitting."}</strong>}
                 </div>
                 <div className="item-actions">
@@ -102,16 +112,16 @@ export function SelectionPage({ locale, paypalEnabled, paypalPriceIds }: { local
                   <button className="icon-button" onClick={() => remove(product!.id)} aria-label="Remove"><Trash2 size={17} /></button>
                 </div>
               </div>
-              <span className="line-price">{formatPrice(product!.price * quantity, locale)}</span>
+              <span className="line-price">{formatUsdTestPriceQuantity(resolveUsdTestPriceCents(product!) ?? 0, quantity) ?? notForSale}</span>
             </article>
           ))}
         </section>
         <aside className="inquiry-card">
           <div className="inquiry-summary">
             <span>{zh ? "参考合计" : "Indicative total"}</span>
-            <strong>{formatPrice(total, locale)}</strong>
+            <strong>{totalLabel}</strong>
           </div>
-          <p>{zh ? "通过 PayPal 在安全结账页完成付款。本站展示的人民币为参考价，PayPal 将使用已确认的美元售价。" : "Pay securely with PayPal. CNY prices shown here are indicative; checkout uses MORALUNE’s confirmed USD prices."}</p>
+          <p>{zh ? "结账未开启。如显示美元测试价，那不是售价。" : "Checkout stays off. A USD test price, when shown, is not a sale price."}</p>
           <button className="button dark submit-button" disabled={!paypalEnabled || !hasUsdPrices || checkoutLoading || loading || hasUnavailable} onClick={checkout}>
             {checkoutLoading && <LoaderCircle className="spin" size={17} />}
             {checkoutLoading ? (zh ? "正在前往 PayPal" : "Opening PayPal") : (zh ? "通过 PayPal 安全付款" : "Pay securely with PayPal")}

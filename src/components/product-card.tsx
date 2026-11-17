@@ -11,6 +11,7 @@ export function ProductCard({ product, locale, index = 0 }: { product: Product; 
   const unavailableLabel = locale === "zh-CN" ? "暂时缺货" : "Unavailable";
   const previewLabel = locale === "zh-CN" ? "预览" : "Preview";
   const price = formatListedPrice(product, locale);
+  const notForSale = locale === "zh-CN" ? "暂不出售" : "Not for sale";
   const pillClass = product.available ? "status-pill is-available" : preview ? "status-pill is-preview" : "status-pill";
   return (
     <article className="product-card" style={{ "--delay": `${index * 70}ms` } as React.CSSProperties}>
@@ -22,7 +23,8 @@ export function ProductCard({ product, locale, index = 0 }: { product: Product; 
       <div className="product-info">
         <div>
           <h3><Link href={`/${locale}/products/${product.slug}`}>{name}</Link></h3>
-          <p>{price ?? (preview ? (locale === "zh-CN" ? "暂不出售" : "Not for sale") : unavailableLabel)}</p>
+          {price && <p className="test-price">{price}</p>}
+          <p>{price || preview ? notForSale : unavailableLabel}</p>
         </div>
       </div>
     </article>

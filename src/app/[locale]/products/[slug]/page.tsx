@@ -57,7 +57,8 @@ export default async function ProductPage({ params }: Props) {
         <div className="product-detail-copy">
           <p className="eyebrow">{zh ? "器物" : "Object"}</p>
           <h1>{displayName(product.name, locale)}</h1>
-          <p className={listedPrice ? "detail-price" : "detail-price detail-price-preview"}>{listedPrice ?? (zh ? "暂不出售" : "Not for sale")}</p>
+          {listedPrice && <p className="detail-price test-price">{listedPrice}</p>}
+          <p className="detail-price detail-price-preview">{zh ? "暂不出售" : "Not for sale"}</p>
           <p className="detail-description">{localize(product.description, locale)}</p>
           {preview ? (
             <p className="price-note">{zh ? "此为内部预览，不能加入清单或结账。" : "Internal preview only. This piece cannot be added or checked out."}</p>

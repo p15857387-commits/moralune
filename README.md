@@ -4,19 +4,24 @@ Moralune storefront scaffold. A bilingual Next.js + React/TypeScript shop for br
 
 ## Run locally
 
+Verified with Node.js v22.23.4 and npm 10.9.9. `package.json` does not pin an engine.
+
 ```bash
 npm install
 cp .env.example .env.local
 npm run dev
 ```
 
-Then open http://localhost:3000. With Sanity and Resend left empty, the site uses the built-in catalog and demo inquiry mode. Copy only `.env.example`; do not commit secrets.
+Then open http://localhost:3000. With Sanity, Resend, and PayPal left empty, the site uses the built-in photo assortment and does not take payment. Copy only `.env.example`; do not commit secrets.
 
 ```bash
 npm test
 npm run lint
 npm run build
+npm run start
 ```
+
+The current preview, image paths, empty USD test-price table, and environment variable names are documented in `CODEX_HANDOFF.md`.
 
 ## Brand v0.2.1
 

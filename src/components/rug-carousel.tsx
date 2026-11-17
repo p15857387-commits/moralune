@@ -4,7 +4,7 @@ import { useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
-import { formatPrice, localize } from "@/lib/catalog";
+import { formatListedPrice, localize } from "@/lib/catalog";
 import type { Locale, Product } from "@/types";
 
 const cutouts: Record<string, string> = {
@@ -89,7 +89,7 @@ export function RugCarousel({ products, locale }: { products: Product[]; locale:
       <div className="rug-caption-row" key={product.id}>
         <div className="rug-caption-index"><span>{locale === "zh-CN" ? "当前作品" : "NOW SHOWING"}</span><span>{String(selected + 1).padStart(2, "0")} / {String(count).padStart(2, "0")}</span></div>
         <div className="rug-caption-main"><h2>{localize(product.name, locale)}</h2><p>{localize(product.description ?? { "zh-CN": "", en: "" }, locale)}</p></div>
-        <div className="rug-caption-action"><span>{formatPrice(product.price, locale)}</span><Link href={`/${locale}/products/${product.slug}`}>{locale === "zh-CN" ? "查看作品" : "VIEW OBJECT"}<ArrowUpRight size={15} /></Link></div>
+        <div className="rug-caption-action"><span>{formatListedPrice(product, locale) ?? (locale === "zh-CN" ? "暂不出售" : "Not for sale")}</span><Link href={`/${locale}/products/${product.slug}`}>{locale === "zh-CN" ? "查看作品" : "VIEW OBJECT"}<ArrowUpRight size={15} /></Link></div>
       </div>
       <div className="rug-picker" aria-label={locale === "zh-CN" ? "选择地毯" : "Choose a rug"}>
         {products.map((item, index) => (

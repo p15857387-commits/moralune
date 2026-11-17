@@ -365,6 +365,7 @@
 .product-thumbs button[aria-pressed="true"]{border-color:var(--blue)}
 .status-pill.is-preview{color:var(--blue);letter-spacing:.12em;text-transform:uppercase}
 .detail-price-preview{color:var(--muted);font-family:var(--serif);font-size:18px}
+.test-price{color:var(--ink);font-size:13px;letter-spacing:.04em}
 .spec-caveat{margin:0 0 8px;color:var(--muted);font-size:11px;letter-spacing:.12em;text-transform:uppercase}
 .product-image-fallback,.photo-fallback{position:absolute;inset:0;display:grid;place-items:center;margin:0;padding:24px;text-align:center;color:var(--muted);background:var(--soft-clay);font-family:var(--serif);font-size:clamp(18px,2vw,28px);line-height:1.35}
 

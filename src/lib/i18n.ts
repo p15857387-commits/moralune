@@ -12,7 +12,7 @@ const dictionary = {
     browse: "进入系列", story: "关于", categories: "系列", featured: "本期", allProducts: "全部系列",
     collection: "全部系列", collectionLead: "块毯、抱枕、墙面挂饰、小摆件与灯。",
     philosophyTitle: "留得下的，\n是手碰得到的。", philosophyBody: "看得到织纹的羊毛，垂下来的亚麻，边角柔和的陶，浅色的木，尽量保持原样。放回那间房间仍然合适，才会留在这里。",
-    add: "加入清单", unavailable: "暂时缺货", material: "材质", dimensions: "尺寸", care: "养护", priceNote: "价格为人民币参考价，提交后将确认库存与配送。",
+    add: "加入清单", unavailable: "暂时缺货", material: "材质", dimensions: "尺寸", care: "养护", priceNote: "如显示金额，均为美元测试价，不是售价。",
     footerNote: "安静的光，放进已有的房间。", footerSign: "为家而设计。", newsletter: "偶尔来信，只谈新作与房间。", emailPlaceholder: "你的邮箱", subscribe: "订阅",
   },
   en: {
@@ -22,7 +22,7 @@ const dictionary = {
     browse: "Explore the collection", story: "About", categories: "The collection", featured: "The edit", allProducts: "The full collection",
     collection: "The collection", collectionLead: "Rugs, cushions, wall hangings, objects, and lamps.",
     philosophyTitle: "What stays\nis what you can touch.", philosophyBody: "Wool you can see. Linen that falls. Clay with a soft edge. Pale wood, left mostly as it is. A piece remains when it still belongs in the room it was chosen for.",
-    add: "Add to selection", unavailable: "Currently unavailable", material: "Material", dimensions: "Dimensions", care: "Care", priceNote: "Prices are shown in CNY. Availability and delivery are confirmed after inquiry.",
+    add: "Add to selection", unavailable: "Currently unavailable", material: "Material", dimensions: "Dimensions", care: "Care", priceNote: "Any amount shown is a USD test price. It is not for sale.",
     footerNote: "Quiet light for the rooms you keep.", footerSign: "Design for the home.", newsletter: "Occasional notes on new pieces and the rooms they enter.", emailPlaceholder: "Your email", subscribe: "Subscribe",
   },
 } as const;

@@ -1,3 +1,4 @@
+import { formatUsdTestPriceCents, resolveUsdTestPriceCents } from "@/lib/usd-test-price";
 import type { Locale, LocalizedText, Product, SelectionItem, SnapshotItem } from "@/types";
 
 const hiddenListing = new Set(["do-not-list", "off-assortment"]);
@@ -69,14 +70,14 @@ export function displayName(value: LocalizedText | undefined, locale: Locale): s
   return lower.charAt(0).toUpperCase() + lower.slice(1);
 }
 
-export function formatPrice(price: number, locale: Locale = "zh-CN") {
-  return new Intl.NumberFormat(locale, { style: "currency", currency: "CNY", maximumFractionDigits: 0 }).format(price);
-}
-
-/** Confirmed sell price only. Preview drafts stay unpriced, including price 0. */
-export function formatListedPrice(product: Pick<Product, "price" | "status" | "published">, locale: Locale): string | undefined {
-  if (isPreviewDraft(product) || product.price <= 0) return undefined;
-  return formatPrice(product.price, locale);
+/**
+ * Shop, PDP, and selection amount. A USD test price keeps the same explicit label in both locales.
+ * The legacy `price` number is not formatted. Missing test prices stay blank.
+ */
+export function formatListedPrice(product: Pick<Product, "slug" | "usdTestPriceCents">, locale: Locale): string | undefined {
+  void locale;
+  const cents = resolveUsdTestPriceCents(product);
+  return cents === undefined ? undefined : formatUsdTestPriceCents(cents);
 }
 
 /**
