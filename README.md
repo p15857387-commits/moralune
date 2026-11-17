@@ -21,7 +21,7 @@ npm run build
 npm run start
 ```
 
-The current preview, image paths, empty USD test-price table, and environment variable names are documented in `CODEX_HANDOFF.md`.
+Image paths, the 48 USD test prices, and environment variable names are documented in `CODEX_HANDOFF.md`. Test prices are not for sale.
 
 ## Brand v0.2.1
 

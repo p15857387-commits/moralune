@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { displayName, formatListedPrice, isPreviewDraft } from "@/lib/catalog";
+import { formatUsdTestUnitNote } from "@/lib/usd-test-price";
 import type { Locale, Product } from "@/types";
 
 export function ProductCard({ product, locale, index = 0 }: { product: Product; locale: Locale; index?: number }) {
@@ -24,6 +25,7 @@ export function ProductCard({ product, locale, index = 0 }: { product: Product; 
         <div>
           <h3><Link href={`/${locale}/products/${product.slug}`}>{name}</Link></h3>
           {price && <p className="test-price">{price}</p>}
+          {price && <p className="test-unit">{formatUsdTestUnitNote(product.slug, locale)}</p>}
           <p>{price || preview ? notForSale : unavailableLabel}</p>
         </div>
       </div>

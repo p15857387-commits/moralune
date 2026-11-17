@@ -30,9 +30,10 @@ npm run start
 - This branch head is the photo-assortment preview. `main` at the time of this handoff is `782820333d38be4f9ad5294f5b9b802681faa0e5`, the earlier supplier-photo preview.
 - The shop lists 48 draft products from `public/products/v2`, not the old supplier SKUs.
 - Counts: rugs 9, cushions 9, wall-hangings 9, objects 12, lamps 9.
-- Each product has `price: 0`, `status: "draft"`, `published: false`, and `available: false`.
-- USD test prices are not filled. `src/data/usd-test-prices.ts` is an empty slug-to-cents map. Wait for the 48-row research CSV before adding any amount.
-- PayPal checkout defaults off (`PAYPAL_CHECKOUT_ENABLED=false`). A test price must not be copied into `PAYPAL_USD_PRICES`.
+- Each product has `price: 0`, `status: "draft"`, `published: false`, and `available: false`. The zero field is not a sell price.
+- USD test amounts are in `src/data/website-usd-test-prices.csv` and `src/data/usd-test-prices.ts`, matched by exact slug. They are Etsy catalog/search recommendations in integer cents, not supplier facts and not official retail prices. `priced_unit` is a testing assumption, not confirmed package contents. `img-3542` is priced as an X+O set of two. No rug size or material from the research is stored on the product.
+- English lists and product pages say `USD TEST PRICE`. Chinese pages say `美元测试价`. Both still say the piece is not for sale.
+- PayPal checkout defaults off (`PAYPAL_CHECKOUT_ENABLED=false`). Test prices are not copied into `PAYPAL_USD_PRICES`.
 
 ## Catalog and images
 
@@ -41,7 +42,7 @@ npm run start
 | Camera-id rows | `src/data/photo-assortment-v2.files.json` |
 | Five named leads and shop order | `src/data/photo-assortment-v2.ts` |
 | Shop product list | `src/data/catalog.ts` (`products`) |
-| Empty USD test-price map | `src/data/usd-test-prices.ts` |
+| USD test-price CSV and cent map | `src/data/website-usd-test-prices.csv`, `src/data/usd-test-prices.ts` |
 | Formatter | `src/lib/usd-test-price.ts` |
 | Photos | `public/products/v2/{category}/{filename}` |
 
@@ -55,7 +56,7 @@ Shop order puts one named lead first in each category and then keeps the camera-
 
 `IMG_3581` and `IMG_3582` are lamps only. There is no sixth category and `其他杂项` is not listed.
 
-When a positive integer cent amount is later entered for an exact slug, the shop list and product page show `USD TEST PRICE $X.XX` in both locales and still say the piece is not for sale. No amount is shown until that map has a valid row. The legacy `price` field is not formatted as CNY.
+The shop list, product page, and selection show `USD TEST PRICE` or `美元测试价` plus the dollar amount, then a testing-assumption unit line, then not for sale. The legacy `price` field is not formatted as CNY. Checkout stays off.
 
 Image files are served from `public/` at their stored pixel size. Product cards mark `/products/v2/` images `unoptimized`, so Next.js does not resize them.
 
@@ -99,10 +100,10 @@ Optional and currently missing on a fresh checkout: Sanity project id and token,
 
 ## Later website ZIP
 
-Include tracked source, `public/` pictures, fonts, licenses, and logos, `brand/`, `package.json`, `package-lock.json`, config, `README.md`, this file, and `.env.example`.
+Make the archive from the merged production commit so its SHA matches `main`. Include tracked source, `public/` pictures, fonts, licenses, and logos, `brand/`, `package.json`, `package-lock.json`, config, `README.md`, this file, `.env.example`, and `src/data/website-usd-test-prices.csv`.
 
-Exclude `node_modules`, `.next`, `.git`, real `.env` files, credentials, cookies, sessions, and private business research. Do not package a price CSV until it has been accepted into `src/data/usd-test-prices.ts`.
+Exclude `node_modules`, `.next`, `.git`, `.vercel`, real `.env` files, credentials, cookies, sessions, and private research. The CSV in this repo is the minimal slug price file only.
 
-## Still waiting
+## Production
 
-The 48-row USD research CSV. Do not invent prices, do not package the final ZIP, and do not deploy before that file is applied.
+`main` is unchanged until this pull request is merged. A local `npm run build` is not a deploy. Optional Sanity, Resend, PayPal, and Shoppaas stay unset in `.env.example`. `cdn.sanity.io` is allowed only if a Sanity project id is configured later. Google Fonts and Unsplash are not used.

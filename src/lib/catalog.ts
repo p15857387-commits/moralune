@@ -75,9 +75,8 @@ export function displayName(value: LocalizedText | undefined, locale: Locale): s
  * The legacy `price` number is not formatted. Missing test prices stay blank.
  */
 export function formatListedPrice(product: Pick<Product, "slug" | "usdTestPriceCents">, locale: Locale): string | undefined {
-  void locale;
   const cents = resolveUsdTestPriceCents(product);
-  return cents === undefined ? undefined : formatUsdTestPriceCents(cents);
+  return cents === undefined ? undefined : formatUsdTestPriceCents(cents, locale);
 }
 
 /**

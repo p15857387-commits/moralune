@@ -11,6 +11,7 @@ import { displayName, formatListedPrice, isPreviewDraft, isPreviewListedProduct,
 import { isLocale, locales, t } from "@/lib/i18n";
 import { env, hasShoppaas } from "@/lib/env";
 import { canonicalProductSlug } from "@/lib/legacy-routes";
+import { formatUsdTestUnitNote } from "@/lib/usd-test-price";
 import { previewRobots } from "@/lib/site-metadata";
 
 type Props = { params: Promise<{ locale: string; slug: string }> };
@@ -58,6 +59,7 @@ export default async function ProductPage({ params }: Props) {
           <p className="eyebrow">{zh ? "器物" : "Object"}</p>
           <h1>{displayName(product.name, locale)}</h1>
           {listedPrice && <p className="detail-price test-price">{listedPrice}</p>}
+          {listedPrice && <p className="price-note test-unit">{formatUsdTestUnitNote(product.slug, locale)}</p>}
           <p className="detail-price detail-price-preview">{zh ? "暂不出售" : "Not for sale"}</p>
           <p className="detail-description">{localize(product.description, locale)}</p>
           {preview ? (

@@ -7,7 +7,7 @@ import { ArrowLeft, LoaderCircle, Minus, Plus, Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { products } from "@/data/catalog";
 import { displayName, formatListedPrice } from "@/lib/catalog";
-import { formatUsdTestPriceQuantity, resolveUsdTestPriceCents } from "@/lib/usd-test-price";
+import { formatUsdTestPriceQuantity, formatUsdTestUnitNote, resolveUsdTestPriceCents } from "@/lib/usd-test-price";
 import { useSelectionStore } from "@/store/selection";
 import type { Locale } from "@/types";
 
@@ -30,7 +30,7 @@ export function SelectionPage({ locale, paypalEnabled, paypalPriceIds }: { local
       if (!value) return notForSale;
       cents.push(value * item.quantity);
     }
-    return formatUsdTestPriceQuantity(cents.reduce((sum, value) => sum + value, 0), 1) ?? notForSale;
+    return formatUsdTestPriceQuantity(cents.reduce((sum, value) => sum + value, 0), 1, locale) ?? notForSale;
   })();
   const hasUnavailable = selected.some((item) => !item.product!.available);
   const hasUsdPrices = selected.every((item) => paypalPriceIds.includes(item.product!.id));
@@ -101,6 +101,7 @@ export function SelectionPage({ locale, paypalEnabled, paypalPriceIds }: { local
                 <div>
                   <h2>{displayName(product!.name, locale)}</h2>
                   <p>{formatListedPrice(product!, locale) ?? notForSale}</p>
+                  <p className="test-unit">{formatUsdTestUnitNote(product!.slug, locale)}</p>
                   {!product!.available && <strong>{zh ? "暂时缺货，请移除后再提交。" : "Currently unavailable. Remove before submitting."}</strong>}
                 </div>
                 <div className="item-actions">
@@ -112,7 +113,7 @@ export function SelectionPage({ locale, paypalEnabled, paypalPriceIds }: { local
                   <button className="icon-button" onClick={() => remove(product!.id)} aria-label="Remove"><Trash2 size={17} /></button>
                 </div>
               </div>
-              <span className="line-price">{formatUsdTestPriceQuantity(resolveUsdTestPriceCents(product!) ?? 0, quantity) ?? notForSale}</span>
+              <span className="line-price">{(() => { const cents = resolveUsdTestPriceCents(product!); return cents ? formatUsdTestPriceQuantity(cents, quantity, locale) : undefined; })() ?? notForSale}</span>
             </article>
           ))}
         </section>
