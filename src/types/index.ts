@@ -30,6 +30,11 @@ export type Product = {
   dimensions?: LocalizedText;
   care?: LocalizedText;
   price: number;
+  /**
+   * Optional USD test amount in integer cents. Omitted until src/data/usd-test-prices.ts
+   * has a row for this slug. It is not a sell price and does not enable checkout.
+   */
+  usdTestPriceCents?: number;
   category?: string;
   available: boolean;
   featured?: boolean;

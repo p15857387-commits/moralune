@@ -3,17 +3,17 @@ import { expect, test } from "@playwright/test";
 test("root opens the English home and language switch still reaches Chinese", async ({ page }) => {
   await page.goto("/");
   await expect(page).toHaveURL(/\/en\/?$/);
-  await expect(page.getByRole("heading", { level: 1 })).toContainText("A quieter way to furnish");
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("Quiet light");
   await page.getByRole("link", { name: "切换到中文" }).click();
   await expect(page).toHaveURL(/\/zh-CN\/?$/);
-  await expect(page.getByRole("heading", { level: 1 })).toContainText("刚刚好的美");
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("安静的光");
   await page.getByRole("link", { name: "Switch to English" }).click();
   await expect(page).toHaveURL(/\/en\/?$/);
 });
 
 test("browse, select and submit an inquiry", async ({ page }) => {
   await page.goto("/zh-CN");
-  await page.getByRole("link", { name: "探索" }).first().click();
+  await page.getByRole("link", { name: "进入系列" }).first().click();
   await page.getByRole("link", { name: "山岚胡桃木托盘" }).first().click();
   await page.getByRole("button", { name: /加入清单/ }).click();
   await page.getByLabel(/选物清单/).click();

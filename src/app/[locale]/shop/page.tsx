@@ -5,7 +5,7 @@ import { PreviewNotice } from "@/components/preview-notice";
 import { ProductGrid } from "@/components/product-grid";
 import { getCatalog } from "@/lib/catalog-source";
 import { localize, productsForShop, sortCategories } from "@/lib/catalog";
-import { isLocale } from "@/lib/i18n";
+import { isLocale, t } from "@/lib/i18n";
 import { previewRobots } from "@/lib/site-metadata";
 
 type Props = { params: Promise<{ locale: string }>; searchParams: Promise<{ category?: string }> };
@@ -15,7 +15,7 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
   if (!isLocale(locale)) return {};
   const { categories } = await getCatalog();
   const active = sortCategories(categories).find((item) => item.slug === category);
-  const title = active ? localize(active.name, locale) : locale === "zh-CN" ? "全部选物" : "Shop";
+  const title = active ? localize(active.name, locale) : t(locale).collection;
   return { title, robots: previewRobots };
 }
 
@@ -27,19 +27,16 @@ export default async function ShopPage({ params, searchParams }: Props) {
   const ordered = sortCategories(categories);
   const active = ordered.find((item) => item.slug === category);
   const visible = productsForShop(products, active?.slug);
-  const title = active ? localize(active.name, locale) : zh ? "全部选物" : "Shop";
-  const lead = active
-    ? localize(active.description, locale)
-    : zh
-      ? "块毯、抱枕与披肩、墙面、器物与灯具，为日常的房间而选。"
-      : "Rugs, cushions and throws, wall, objects, and lighting — chosen for everyday rooms.";
+  const copy = t(locale);
+  const title = active ? localize(active.name, locale) : copy.collection;
+  const lead = active ? localize(active.description, locale) : copy.collectionLead;
   const countLabel = zh ? `${visible.length} 件` : `${visible.length} ${visible.length === 1 ? "object" : "objects"}`;
 
   return (
     <div className="shop-page page-shell">
       <header className="page-intro">
         <PreviewNotice locale={locale} />
-        <p className="eyebrow">{zh ? "选物" : "Shop"}</p>
+        <p className="eyebrow">{copy.shop}</p>
         <h1>{title}</h1>
         <p>{lead}</p>
       </header>

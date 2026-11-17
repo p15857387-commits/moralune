@@ -139,42 +139,33 @@ describe("product master v1", () => {
     expect(productMasterV1.find((record) => record.sku === "LGT-TRAV-02-BEI-MSH-UK")?.dimensionsSizeVariants).toBe("unknown");
   });
 
-  it("hides drafts from the public catalog and keeps supplier fields internal", () => {
+  it("hides the supplier master from the public catalog and keeps supplier fields internal", () => {
     const listed = listPublicFallbackProducts();
-    expect(listed).toHaveLength(products.length);
-    expect(listed.some((product) => product.id === "indigo-tide-rug" && product.price === 4280 && product.available)).toBe(true);
-    const listedIds = new Set(listed.map((product) => product.id));
+    expect(listed).toHaveLength(0);
+    expect(products.every((product) => product.status === "draft" && product.price === 0)).toBe(true);
     for (const record of productMasterV1) {
-      expect(listedIds.has(record.sku)).toBe(false);
       expect(products.some((product) => product.id === record.sku || product.slug === record.sku.toLowerCase())).toBe(false);
     }
     const publicJson = JSON.stringify(productMasterDrafts);
-    const listedJson = JSON.stringify(listed);
+    const listedJson = JSON.stringify(products);
     for (const secret of ["made-in-china.com", "Yabang", "EST ", "90-260V", "fobUnitEstUsd", "supplierType"]) {
       expect(publicJson).not.toContain(secret);
       expect(listedJson).not.toContain(secret);
     }
-    expect(JSON.stringify(products)).not.toContain("made-in-china.com");
   });
 
-  it("lists preview drafts on the shop catalog and keeps them unpriced", async () => {
+  it("lists the folder-grouped photo assortment on the shop and keeps it unpriced", async () => {
     const catalog = await getCatalog();
-    const drafts = catalog.products.filter((product) => product.status === "draft");
-    expect(drafts).toHaveLength(47);
-    expect(drafts.some((product) => product.id.startsWith("WAL-LOOM"))).toBe(false);
-    expect(drafts.every((product) => isPreviewListedProduct(product) && !isPublicCatalogProduct(product) && !isPurchasable(product) && product.price === 0)).toBe(true);
-    expect(catalog.products.some((product) => product.id === "indigo-tide-rug")).toBe(true);
-    expect(productsForShop(catalog.products, "art-rugs").every((product) => product.status === "draft" && product.category === "art-rugs")).toBe(true);
-    expect(productsForShop(catalog.products, "art-rugs")).toHaveLength(10);
-    expect(productsForShop(catalog.products, "wall-art").some((product) => product.id.startsWith("WAL-LOOM"))).toBe(false);
-    expect(productsForShop(catalog.products)[0]?.status).toBe("draft");
+    expect(catalog.products).toHaveLength(48);
+    expect(catalog.products.every((product) => product.status === "draft" && product.price === 0 && !isPurchasable(product) && isPreviewListedProduct(product) && !isPublicCatalogProduct(product))).toBe(true);
+    expect(catalog.products.some((product) => product.id === "indigo-tide-rug" || product.id.startsWith("WAL-LOOM") || product.id.startsWith("RUG-"))).toBe(false);
+    expect(productsForShop(catalog.products, "rugs")).toHaveLength(9);
+    expect(productsForShop(catalog.products, "cushions")).toHaveLength(9);
+    expect(productsForShop(catalog.products, "wall-hangings")).toHaveLength(9);
+    expect(productsForShop(catalog.products, "objects")).toHaveLength(12);
+    expect(productsForShop(catalog.products, "lamps")).toHaveLength(9);
+    expect(productsForShop(catalog.products, "lamps").filter((product) => product.id === "img-3581" || product.id === "img-3582")).toHaveLength(2);
+    expect(productsForShop(catalog.products, "objects").some((product) => product.id === "img-3581" || product.id === "img-3582")).toBe(false);
     expect(JSON.stringify(catalog)).not.toContain("made-in-china.com");
-    const terra = drafts.find((product) => product.id === "RUG-TERRA-01-SND-160x230");
-    expect(terra?.image).toBeUndefined();
-    expect(terra?.images).toEqual([]);
-    const clay = drafts.find((product) => product.id === "RUG-TERRA-04-CLY-160x230");
-    expect(clay?.description?.en).toBe("Hand-tufted wool in a muted clay tone; hank-dyed yarn for depth of colour.");
-    expect(clay?.unverifiedFields).toContain("material");
-    expect(clay?.material?.en).toContain("bamboo viscose");
   });
 });

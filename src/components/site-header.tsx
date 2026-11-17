@@ -19,7 +19,7 @@ export function SiteHeader({ locale, categories }: { locale: Locale; categories:
   ];
   return (
     <header className="site-header">
-      <div className="announcement"><span>{locale === "zh-CN" ? "为日常，选一点刚刚好的美" : "A little beauty, chosen for everyday living"}</span></div>
+      <div className="announcement"><span>{copy.announcement}</span></div>
       <div className="header-inner">
         <Link className="wordmark ml-wordmark" href={`/${locale}`} aria-label={brand.zh}>
           <span className="brand-logo-window"><img src={wordmarks.light} alt={brand.zh} /></span>
@@ -35,7 +35,7 @@ export function SiteHeader({ locale, categories }: { locale: Locale; categories:
           <MobileMenu locale={locale} links={mobileLinks} />
         </div>
       </div>
-      <nav className="category-nav" aria-label={locale === "zh-CN" ? "品类" : "Shop categories"}>
+      <nav className="category-nav" aria-label={locale === "zh-CN" ? "系列" : "Collection"}>
         {categories.map((category) => (
           <Link key={category.id} href={`${shopHref}?category=${category.slug}`}>{localize(category.name, locale)}</Link>
         ))}
